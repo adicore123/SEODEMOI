@@ -126,7 +126,7 @@ function buildPage(lead) {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=Heebo:wght@400;600;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="${ASSET}/demo.css?v=wp2">
+<link rel="stylesheet" href="${ASSET}/demo.css?v=wp3">
 <style>:root{--accent:${cat.accent};--accent-dark:${cat.accentDark};--chip:${cat.chip}}</style>
 </head>
 <body>
@@ -319,7 +319,7 @@ function buildGalleryIndex() {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=Heebo:wght@400;600;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/style.css?v=wp1">
+<link rel="stylesheet" href="../assets/style.css?v=wp3">
 </head>
 <body>
 <header class="topbar">
