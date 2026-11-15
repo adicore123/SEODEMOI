@@ -316,14 +316,44 @@ export default async function ClientPage({ params }: { params: Promise<{ slug: s
       </main>
 
       <section className="pitch">
-        <div className="wrap pitch-inner">
-          <div>
-            <div className="pitch-eyebrow">האתר הזה הוא הדגמה</div>
-            <h2>האתר הזה יכול להיות של {lead.shortName} — תוך שבועות</h2>
-            <p>
-              בנינו את עמוד ההדגמה הזה בחינם כדי להראות לכם איך אתר מקצועי, מהיר ומקודם בגוגל מביא לקוחות חדשים בדיוק ברגע שהם מחפשים את השירות שלכם.
-              בערך תוך 3 חודשים גוגל מזהה את האתר — ומשם הוא עובד בשבילכם: 5–10 לקוחות חדשים בכל חודש.
-            </p>
+        <div className="wrap">
+          <div className="pitch-eyebrow">האתר הזה הוא הדגמה — והוא יכול להיות שלכם</div>
+          <h2 className="pitch-title">מה תקבלו וכמה זה עולה — הכול שקוף</h2>
+          <div className="pkgs">
+            <div className="pkg">
+              <div className="pkg-head">
+                <span className="pkg-ico"><Icon name="laptop" size={22} /></span>
+                <div><b>הקמת האתר</b><span className="pkg-sub">תשלום חד-פעמי</span></div>
+              </div>
+              <div className="pkg-price">₪500 <small>+ מע״מ</small></div>
+              <ul className="pkg-list">
+                <li><Icon name="check" size={15} />אתר אישי המותאם לעסק שלכם — עיצוב, תוכן ותמונות, בדיוק כמו העמוד הזה</li>
+                <li><Icon name="check" size={15} />אתר מהיר ומותאם לנייד — רוב הלקוחות מגיעים מהסלולרי</li>
+                <li><Icon name="check" size={15} />מילות המפתח שהלקוחות שלכם מחפשים בגוגל, מוטמעות מהיום הראשון</li>
+                <li><Icon name="check" size={15} />חיבור לגוגל והגשת האתר לאינדקס — שיופיע בחיפוש</li>
+              </ul>
+            </div>
+            <div className="pkg">
+              <div className="pkg-head">
+                <span className="pkg-ico"><Icon name="chart" size={22} /></span>
+                <div><b>אחזקה וקידום שוטף</b><span className="pkg-sub">בכל חודש</span></div>
+              </div>
+              <div className="pkg-price">₪200 <small>+ מע״מ לחודש</small></div>
+              <ul className="pkg-list">
+                <li><Icon name="check" size={15} />קידום אורגני מתמשך בגוגל — בלי עלות פרסום ממומן</li>
+                <li><Icon name="check" size={15} />עדכוני תוכן ומילות מפתח לפי ביצועי החיפושים</li>
+                <li><Icon name="check" size={15} />ניטור דירוגים ואופטימיזציה שוטפת של האתר</li>
+                <li><Icon name="check" size={15} />אחזקה טכנית, גיבויים ואבטחה — אתם לא נוגעים בכלום</li>
+              </ul>
+            </div>
+          </div>
+          <div className="roi-strip">
+            <Icon name="wallet" size={20} />
+            <span>
+              איך זה מחזיר את עצמו: בתחום שלכם עסקה ממוצעת עומדת על {seo.ticket} —{' '}
+              <b>לקוח אחד בחודש כבר מכסה את כל העלות החודשית</b>, וכל לקוח נוסף הוא רווח נקי.
+              בערך תוך 3 חודשים גוגל מזהה ומדרג את האתר, ומשם הוא מביא 5–10 לקוחות חדשים בכל חודש.
+            </span>
           </div>
           <div className="pitch-cta">
             {CONFIG.sender.whatsapp ? (

@@ -9,6 +9,12 @@ export const CONFIG = {
 // לקוחות קיימים שכבר מרוויחים — מוצגים בהודעה כהוכחה חברתית
 export const PROOF_CLIENTS = ['https://yairdrive.co.il', 'https://yb-clean.co.il'];
 
+// מודל התמחור — נקודה אחת לשינוי
+export const PRICING = {
+  setup: '₪500 + מע״מ (חד-פעמית)',
+  monthly: '₪200 + מע״מ לחודש',
+};
+
 export function waMessage(lead: { shortName: string; category: string; city: string; slug: string }, origin: string) {
   const link = `${origin}/${lead.slug}`;
   const keyword = `${lead.category} ב${lead.city}`;
@@ -19,7 +25,8 @@ export function waMessage(lead: { shortName: string; category: string; city: str
     `בנינו לכם *אתר לדוגמה* בחינם, כדי שתראו איך העסק יכול להיראות באינטרנט 👇\n` +
     `${link}\n` +
     `אצלנו זה כבר עובד: לקוחות כמו ${proof} כבר מדורגים בגוגל, מביאים לקוחות חדשים כל חודש ומרוויחים מהאתר.\n` +
-    `התהליך פשוט: בערך תוך 3 חודשים גוגל מזהה ומדרג את האתר, ומשם הוא מביא בין 5 ל-10 לקוחות חדשים בכל חודש — לקוחות שהיום מגיעים למתחרים.\n` +
+    `התהליך פשוט: בערך תוך 3 חודשים גוגל מזהה ומדרג את האתר, ומשם הוא מביא בין 5 ל-10 לקוחות חדשים בכל חודש.\n` +
+    `השקעה: ${PRICING.setup} להקמת אתר אישי (בדיוק כמו בדוגמה), ו-${PRICING.monthly} לאחזקה שוטפת וקידום אורגני בגוגל — בלי פרסום ממומן ובלי הפתעות.\n` +
     `זו הדגמה בלבד, בלי שום התחייבות 🙂`
   );
 }
