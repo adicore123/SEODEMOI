@@ -1,0 +1,18 @@
+# תלויות ובנייה
+node_modules/
+next/node_modules/
+tools/node_modules/
+next/.next/
+next/out/
+next/.vercel/
+next/.env.local
+*.tsbuildinfo
+next-env.d.ts
+
+# חבילות פריסה מקומיות (ניתנות ליצירה מחדש)
+.zcode-site/
+seoleads-clients.zip
+
+# מערכת
+.DS_Store
+Thumbs.db

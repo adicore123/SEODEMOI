@@ -1,0 +1,81 @@
+/* style.css — דשבורד מרכז ההדגמות */
+:root{
+  --paper:#f4f2ec; --ink:#122b24; --muted:#5a6b62; --line:#d8dad0;
+  --green:#18543f; --green-dark:#103e2e; --mint:#dceddf; --wa:#1e9e53;
+  --white:#fffefa; --radius:14px;
+  --font-d:"Heebo","Assistant",sans-serif;
+  --font-b:"Assistant","Heebo",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 var(--font-b);-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--font-d);letter-spacing:-.02em}
+.icn{flex:none;vertical-align:-2px}
+.wrap{max-width:1240px;margin-inline:auto;padding-inline:22px}
+a{color:var(--green)}
+
+/* פס עליון */
+.topbar{background:var(--green);color:#fff;box-shadow:0 2px 14px rgba(0,0,0,.18)}
+.topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-block:14px;flex-wrap:wrap}
+.brand{display:flex;gap:11px;align-items:center}
+.mark{width:30px;height:30px;border:4px solid #fff;border-radius:100%;display:grid;place-items:center;flex:none}
+.mark::before{content:"";width:10px;height:10px;border-radius:50%;background:#fff}
+.brand strong{font-size:19px;display:block;line-height:1.2}
+.brand small{font-size:12.5px;opacity:.85}
+.topbar-stats{font-size:14px;background:rgba(255,255,255,.14);border-radius:20px;padding:6px 14px}
+#stat-sent{font-weight:700;color:#b9f4d3}
+
+/* פתיח */
+.intro{margin-block:26px 18px;max-width:70ch}
+h1{font-size:clamp(1.5rem,3.4vw,2.3rem);letter-spacing:-.03em;margin:0 0 8px}
+.intro p{margin:0;color:var(--muted);font-size:15.5px}
+
+/* סינון */
+.controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:20px}
+input,select{border:1px solid #a9b5ac;border-radius:10px;background:var(--white);color:var(--ink);padding:10px 13px;min-height:44px;font:inherit}
+input{flex:1;min-width:220px}
+select{min-width:130px}
+.count{font-size:13.5px;color:var(--muted);margin-inline-start:auto;white-space:nowrap}
+
+/* גריד כרטיסים */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;padding-bottom:40px}
+.card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .18s,transform .18s}
+.card:hover{box-shadow:0 10px 26px rgba(16,62,46,.13);transform:translateY(-2px)}
+.thumb{position:relative;aspect-ratio:16/9;overflow:hidden;background:#dfe4dd}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb .badge{position:absolute;top:10px;inset-inline-start:10px;background:rgba(16,43,36,.78);color:#fff;font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px}
+.thumb .sentflag{position:absolute;top:10px;inset-inline-end:10px;background:#1e9e53;color:#fff;font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px}
+.card-body{padding:13px 15px 10px;flex:1}
+.card-body h3{margin:0 0 6px;font-size:17px;line-height:1.3;letter-spacing:-.01em;min-height:2.4em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.meta{display:flex;gap:6px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);align-items:center}
+.meta-city{display:inline-flex;align-items:center;gap:4px}
+.chip{background:var(--mint);color:#183e2d;border-radius:20px;padding:2px 10px;font-weight:700}
+.stars{color:#9e6100;font-weight:700;display:inline-flex;align-items:center;gap:3px}
+.sentflag{display:inline-flex;align-items:center;gap:4px}
+.card-actions{display:flex;gap:8px;padding:0 15px 15px}
+.btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;border-radius:10px;border:1.5px solid var(--green);padding:9px 6px;min-height:42px;font-weight:700;font-size:14px;text-decoration:none;cursor:pointer;font-family:var(--font-d)}
+.btn-view{background:var(--white);color:var(--green)}
+.btn-view:hover{background:var(--mint)}
+.btn-wa{background:var(--wa);border-color:var(--wa);color:#fff}
+.btn-wa:hover{background:#178a45}
+.btn-copy{flex:0 0 46px;background:var(--white);color:var(--muted);border-color:#b7c0b8}
+.btn-copy:hover{color:var(--ink);border-color:var(--ink)}
+.card[data-sent="1"]{outline:2px solid var(--wa);outline-offset:-2px}
+
+.empty{text-align:center;padding:40px;background:var(--white);border:1px dashed var(--line);border-radius:var(--radius)}
+.foot{text-align:center;color:var(--muted);font-size:12.5px;padding:18px;border-top:1px solid var(--line)}
+[hidden]{display:none!important}
+
+/* טוסט העתקה */
+.toast{position:fixed;bottom:24px;inset-inline-start:50%;transform:translateX(50%);background:var(--ink);color:#fff;padding:11px 22px;border-radius:24px;font-size:14.5px;box-shadow:0 8px 24px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:opacity .25s,translate .25s;z-index:50}
+.toast.show{opacity:1;translate:0 -8px}
+
+@media(max-width:640px){
+  .wrap{padding-inline:14px}
+  .controls input{min-width:100%}
+  .count{margin-inline-start:0}
+  .grid{grid-template-columns:1fr 1fr;gap:10px}
+  .card-body h3{font-size:14.5px}
+  .btn{flex-direction:column;font-size:12px;min-height:38px;padding:6px 4px}
+  .btn-copy{flex:1}
+}
+@media(max-width:430px){.grid{grid-template-columns:1fr}}

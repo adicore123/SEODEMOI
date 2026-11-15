@@ -1,0 +1,850 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>לקוחות פוטנציאליים לקידום אורגני בגוגל</title>
+<style>
+  :root{color-scheme:light;--paper:#f6f4ee;--ink:#102b25;--muted:#496158;--line:#cacbc0;--green:#18543f;--mint:#dceddf;--white:#fffefa}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 "Arial","Segoe UI",sans-serif}
+  .wrap{max-width:1160px;margin-inline:auto;padding-inline:28px}
+  .masthead{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-block:18px;border-bottom:1px solid var(--line)}
+  .brand{display:flex;gap:10px;align-items:center;font-size:20px;font-weight:700}
+  .mark{width:28px;height:28px;border:4px solid var(--green);border-radius:100%;display:grid;place-items:center;flex:none}
+  .mark::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--green)}
+  time{font-size:14px;color:var(--muted)}
+  .hero{position:relative;isolation:isolate;overflow:hidden;background:#102e28;border-radius:18px;margin-block:24px;padding:36px min(5vw,53px);color:#fffef9}
+  .hero::before{content:"";position:absolute;z-index:-1;width:445px;height:390px;left:-190px;bottom:-239px;border-radius:48% 62% 42% 51%;transform:rotate(-19deg);background:repeating-radial-gradient(ellipse at 54% 57%,transparent 0 22px,#74af94 23px,transparent 24px 28px);opacity:.43;pointer-events:none}
+  h1,h2,h3,p{margin:0}
+  h1{font-size:clamp(2.3rem,5.4vw,4.55rem);line-height:1.1;letter-spacing:-.045em}
+  .hero p{font-size:clamp(1.13rem,2.5vw,2rem);color:#f1f3e9;margin-top:6px}
+  .criteria{list-style:none;padding:13px 0;margin:0;display:grid;grid-template-columns:repeat(4,1fr);border-block:1px solid var(--line);text-align:center;font-weight:700}
+  .criteria li+li{border-inline-start:1px solid var(--line)}
+  .section-head{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-block:24px 16px}
+  h2{font-size:clamp(1.65rem,3vw,2.23rem);letter-spacing:-.035em;line-height:1.15}
+  .section-head p{font-size:14px;color:var(--muted);margin-top:5px}
+  .controls{display:flex;align-items:center;gap:10px}
+  input,select{border:1px solid #9ba99f;border-radius:8px;background:var(--white);color:var(--ink);padding:10px 12px;min-height:42px;font:inherit}
+  input{width:min(30vw,330px)}
+  select{min-width:132px}
+  .leads{margin:0;padding:0;list-style:none;background:var(--white);border:1px solid #bfc5b9;border-radius:12px;overflow:hidden}
+  .lead{display:grid;grid-template-columns:minmax(220px,1.65fr) minmax(86px,.55fr) minmax(105px,.68fr) minmax(250px,1.45fr);align-items:center;column-gap:18px;padding:14px 21px}
+  .lead:not([hidden])~.lead:not([hidden]){border-top:1px solid #d5d8d0}
+  h3{font-size:21px;letter-spacing:-.025em;line-height:1.2;margin-bottom:5px}
+  .identity p{font-size:14px;color:var(--muted);margin-top:3px}
+  .category{background:var(--mint);color:#183e2d;border-radius:20px;padding:2px 9px;font-size:13px;white-space:nowrap}
+  .rating{text-align:center;font-size:13px;color:var(--muted)}
+  .score{font-size:22px;color:var(--ink);line-height:1.25;font-variant-numeric:tabular-nums}
+  .score span{color:#9e6100}
+  .contact{display:grid;justify-items:start;font-size:14px;gap:2px}
+  a{color:var(--green);text-underline-offset:3px}
+  a:hover{text-decoration-thickness:2px}
+  .buttons{display:flex;gap:8px;justify-content:flex-end}
+  .button{border:1px solid var(--green);border-radius:8px;display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:8px 13px;min-height:41px;text-decoration:none;font-weight:700}
+  .whatsapp{background:var(--green);color:#fff;min-width:108px}
+  .whatsapp:hover{background:#103e2e}
+  .maps:hover{background:var(--mint)}
+  .source{text-align:left;font-size:12px;color:var(--muted);margin-top:5px}
+  :focus-visible{outline:3px solid #a46200;outline-offset:2px}
+  .note{border-top:1px solid var(--line);margin-top:22px;padding-block:15px 28px}
+  .note h2{font-size:18px;margin-bottom:6px}
+  .note p{max-width:90ch;color:var(--muted);font-size:14px}
+  .empty{text-align:center;padding:28px;background:var(--white);border:1px solid var(--line);border-radius:12px}
+  [hidden]{display:none!important}
+  @media(max-width:850px){.lead{grid-template-columns:minmax(190px,1fr) 80px minmax(160px,1fr);gap:8px 15px}.contact{grid-column:1;grid-row:2}.actions{grid-column:3;grid-row:1/span 2}}
+  @media(max-width:600px){.wrap{padding-inline:15px}.masthead{gap:8px}.brand{font-size:17px}.mark{width:23px;height:23px}.masthead time{font-size:12px;white-space:nowrap}.hero{margin-block:16px;padding:30px 19px 40px}.hero::before{left:-310px;opacity:.35}.criteria{grid-template-columns:repeat(2,1fr);row-gap:8px;font-size:13px}.criteria li:nth-child(3){border:0}.section-head{display:grid;gap:11px}.controls{display:grid;grid-template-columns:1fr auto}.controls input{width:100%;min-width:0}.controls select{min-width:95px}.lead{grid-template-columns:minmax(0,1fr) minmax(64px,auto);padding:14px;gap:9px 10px}.contact{grid-column:1/-1;grid-row:auto;display:flex;gap:8px}.actions{grid-column:1/-1;grid-row:auto}.buttons{justify-content:flex-start}.source{text-align:right}.rating{align-self:start}.identity h3{font-size:19px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="masthead"><div class="brand"><span class="mark" aria-hidden="true"></span>מחקר עסקים מקומיים</div><time datetime="2026-11-14">14 בנובמבר 2026</time></header>
+<main>
+  <section class="hero"><h1>לקוחות פוטנציאליים</h1><p>קידום אורגני בגוגל</p></section>
+  <ul class="criteria" aria-label="תנאי הסינון"><li>דירוג מעל 4.4</li><li>20 ביקורות ומעלה</li><li>עסקים פעילים</li><li>לא נמצא אתר עצמאי</li></ul>
+  <section aria-labelledby="results-title">
+    <div class="section-head">
+      <div><h2 id="results-title">רשימת עסקים</h2><p id="count" role="status">121 עסקים ב־22 יישובים · לפי מספר ביקורות</p></div>
+      <div class="controls"><input id="search" type="search" aria-label="חיפוש עסק" placeholder="חיפוש לפי שם, תחום או כתובת" autocomplete="off"><select id="city" aria-label="סינון לפי עיר"><option value="">כל הערים</option><option>אשדוד</option><option>אשקלון</option><option>באר שבע</option><option>בני ברק</option><option>בת ים</option><option>גבעתיים</option><option>הוד השרון</option><option>הרצליה</option><option>חולון</option><option>חיפה</option><option>ירושלים</option><option>כפר יונה</option><option>כפר סבא</option><option>נתניה</option><option>פתח תקווה</option><option>קריית ביאליק</option><option>קרית אונו</option><option>קרית טבעון</option><option>ראשון לציון</option><option>רחובות</option><option>רמת גן</option><option>תל אביב-יפו</option></select></div>
+    </div>
+    <ul id="leads" class="leads"><li class="lead" data-city="הוד השרון">
+  <div class="identity"><h3><bdi>יוסי וגיא עיצוב שיער - תספורת נשים | החלקה אורגנית | צבע לשיער | תספורת גברים | זקן |תספורת ילדים</bdi></h3><span class="category">מספרת גברים</span><p>כניסה א, יהונתן 6 · הוד השרון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>949 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972525600006">052-560-0006</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972525600006" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק יוסי וגיא עיצוב שיער - תספורת נשים | החלקה אורגנית | צבע לשיער | תספורת גברים | זקן |תספורת ילדים">וואטסאפ</a> <a href="https://www.google.com/maps?cid=924072596204113045" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · יוסי וגיא עיצוב שיער - תספורת נשים | החלקה אורגנית | צבע לשיער | תספורת גברים | זקן |תספורת ילדים">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijyyjoc0c3" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%99%D7%95%D7%A1%D7%99+%D7%95%D7%92%D7%99%D7%90+%D7%A2%D7%99%D7%A6%D7%95%D7%91+%D7%A9%D7%99%D7%A2%D7%A8+-+%D7%AA%D7%A1%D7%A4%D7%95%D7%A8%D7%AA+%D7%A0%D7%A9%D7%99%D7%9D+%D7%94%D7%95%D7%93+%D7%94%D7%A9%D7%A8%D7%95%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="ראשון לציון">
+  <div class="identity"><h3><bdi>נדב סלולר-קרית גנים</bdi></h3><span class="category">תיקון טלפונים</span><p>נגבה 24 · ראשון לציון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>651 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972586300555">058-630-0555</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972586300555" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק נדב סלולר-קרית גנים">וואטסאפ</a> <a href="https://www.google.com/maps?cid=8346805559959796088" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · נדב סלולר-קרית גנים">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijpruxjha1" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A0%D7%93%D7%91+%D7%A1%D7%9C%D7%95%D7%9C%D7%A8-%D7%A7%D7%A8%D7%99%D7%AA+%D7%92%D7%A0%D7%99%D7%9D+%D7%A8%D7%90%D7%A9%D7%95%D7%9F+%D7%9C%D7%A6%D7%99%D7%95%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="תל אביב-יפו">
+  <div class="identity"><h3><bdi>K9 Style - מספרת כלבים בתל אביב</bdi></h3><span class="category">טיפוח חיות מחמד</span><p>בן יהודה 211 · תל אביב-יפו</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>626 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972527211322">052-721-1322</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972527211322" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק K9 Style - מספרת כלבים בתל אביב">וואטסאפ</a> <a href="https://www.google.com/maps?cid=13239039546457213032" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · K9 Style - מספרת כלבים בתל אביב">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijwrlxyjl" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=K9+Style+-+%D7%9E%D7%A1%D7%A4%D7%A8%D7%AA+%D7%9B%D7%9C%D7%91%D7%99%D7%9D+%D7%91%D7%AA%D7%9C+%D7%90%D7%91%D7%99%D7%91%E2%80%8E+%D7%AA%D7%9C+%D7%90%D7%91%D7%99%D7%91-%D7%99%D7%A4%D7%95" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="הרצליה">
+  <div class="identity"><h3><bdi>פון פוינט חנות ומעבדת סלולר ומחשבים</bdi></h3><span class="category">תיקון טלפונים</span><p>הס 36 · הרצליה</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>598 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972523656045">052-365-6045</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972523656045" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק פון פוינט חנות ומעבדת סלולר ומחשבים">וואטסאפ</a> <a href="https://www.google.com/maps?cid=10895649863128219473" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · פון פוינט חנות ומעבדת סלולר ומחשבים">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijfrjqiw1i" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A4%D7%95%D7%9F+%D7%A4%D7%95%D7%99%D7%A0%D7%98+%D7%97%D7%A0%D7%95%D7%AA+%D7%95%D7%9E%D7%A2%D7%91%D7%93%D7%AA+%D7%A1%D7%9C%D7%95%D7%9C%D7%A8+%D7%95%D7%9E%D7%97%D7%A9%D7%91%D7%99%D7%9D+%D7%94%D7%A8%D7%A6%D7%9C%D7%99%D7%94" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="חיפה">
+  <div class="identity"><h3><bdi>מוסך זוהיר</bdi></h3><span class="category">מוסך</span><p>השיש 53 · חיפה</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>512 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972543366132">054-336-6132</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972543366132" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק מוסך זוהיר">וואטסאפ</a> <a href="https://www.google.com/maps?cid=5719104459782173509" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · מוסך זוהיר">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijt3nmj7ew" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%9E%D7%95%D7%A1%D7%9A+%D7%96%D7%95%D7%94%D7%99%D7%A8+%D7%97%D7%99%D7%A4%D7%94" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="חולון">
+  <div class="identity"><h3><bdi>מוסך TOP MOTORS חולון - טופ מוטורס</bdi></h3><span class="category">מוסך</span><p>פליקס זנדמן 12 · חולון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>481 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972525050405">052-505-0405</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972525050405" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק מוסך TOP MOTORS חולון - טופ מוטורס">וואטסאפ</a> <a href="https://www.google.com/maps?cid=14480688636262259546" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · מוסך TOP MOTORS חולון - טופ מוטורס">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijntqiy1" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%9E%D7%95%D7%A1%D7%9A+TOP+MOTORS+%D7%97%D7%95%D7%9C%D7%95%D7%9F+-+%D7%98%D7%95%D7%A4+%D7%9E%D7%95%D7%98%D7%95%D7%A8%D7%A1+%D7%97%D7%95%D7%9C%D7%95%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="חיפה">
+  <div class="identity"><h3><bdi>ההוא מהפלאפונים</bdi></h3><span class="category">תיקון טלפונים</span><p>טשרניחובסקי 35 · חיפה</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>448 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972537559979">053-755-9979</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972537559979" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק ההוא מהפלאפונים">וואטסאפ</a> <a href="https://www.google.com/maps?cid=6181330292542277904" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · ההוא מהפלאפונים">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijnxg8qt7" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%94%D7%94%D7%95%D7%90+%D7%9E%D7%94%D7%A4%D7%9C%D7%90%D7%A4%D7%95%D7%A0%D7%99%D7%9D+%D7%97%D7%99%D7%A4%D7%94" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="ירושלים">
+  <div class="identity"><h3><bdi>יורם תלתלים מספרה קרית יובל ירושלים</bdi></h3><span class="category">מספרה</span><p>אורוגואי 31 · ירושלים</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.8</strong></div><div>403 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972509222261">050-922-2261</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972509222261" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק יורם תלתלים מספרה קרית יובל ירושלים">וואטסאפ</a> <a href="https://www.google.com/maps?cid=16472067697391628036" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · יורם תלתלים מספרה קרית יובל ירושלים">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijj5dhiytx" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%99%D7%95%D7%A8%D7%9D+%D7%AA%D7%9C%D7%AA%D7%9C%D7%99%D7%9D+%D7%9E%D7%A1%D7%A4%D7%A8%D7%94+%D7%A7%D7%A8%D7%99%D7%AA+%D7%99%D7%95%D7%91%D7%9C+%D7%99%D7%A8%D7%95%D7%A9%D7%9C%D7%99%D7%9D+%D7%99%D7%A8%D7%95%D7%A9%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="אשקלון">
+  <div class="identity"><h3><bdi>ברק מחשבים</bdi></h3><span class="category">תיקון מחשבים</span><p>יהדות ספרד 19 · אשקלון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.8</strong></div><div>394 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972527797776">052-779-7776</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972527797776" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק ברק מחשבים">וואטסאפ</a> <a href="https://www.google.com/maps?cid=14851029787073093242" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · ברק מחשבים">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijk6gbcxcc" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%91%D7%A8%D7%A7+%D7%9E%D7%97%D7%A9%D7%91%D7%99%D7%9D+%D7%90%D7%A9%D7%A7%D7%9C%D7%95%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="חולון">
+  <div class="identity"><h3><bdi>צמיגי קוגל</bdi></h3><span class="category">צמיגים</span><p>שדרות לוי אשכול 1 · חולון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.7</strong></div><div>330 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972504802180">050-480-2180</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972504802180" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק צמיגי קוגל">וואטסאפ</a> <a href="https://www.google.com/maps?cid=13535966174660791832" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · צמיגי קוגל">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijvqfwwbm0" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A6%D7%9E%D7%99%D7%92%D7%99+%D7%A7%D7%95%D7%92%D7%9C+%D7%97%D7%95%D7%9C%D7%95%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="אשדוד">
+  <div class="identity"><h3><bdi>מנהרת הנוצץ</bdi></h3><span class="category">שטיפת רכב</span><p>שדרות בן גוריון · אשדוד</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.5</strong></div><div>323 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972525651472">052-565-1472</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972525651472" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק מנהרת הנוצץ">וואטסאפ</a> <a href="https://www.google.com/maps?cid=13699375925373645804" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · מנהרת הנוצץ">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijxahx2yj" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%9E%D7%A0%D7%94%D7%A8%D7%AA+%D7%94%D7%A0%D7%95%D7%A6%D7%A5+%D7%90%D7%A9%D7%93%D7%95%D7%93" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="אשדוד">
+  <div class="identity"><h3><bdi>מספרה &amp; מכון שיזוף Zohar’s Barbershop</bdi></h3><span class="category">מספרת גברים</span><p>העצמאות 56 · אשדוד</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>321 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972545400324">054-540-0324</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972545400324" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק מספרה &amp; מכון שיזוף Zohar’s Barbershop">וואטסאפ</a> <a href="https://www.google.com/maps?cid=18262701887852447889" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · מספרה &amp; מכון שיזוף Zohar’s Barbershop">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijw8vohhwj" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%9E%D7%A1%D7%A4%D7%A8%D7%94+%26+%D7%9E%D7%9B%D7%95%D7%9F+%D7%A9%D7%99%D7%96%D7%95%D7%A3+Zohar%E2%80%99s+Barbershop+%D7%90%D7%A9%D7%93%D7%95%D7%93" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="חולון">
+  <div class="identity"><h3><bdi>אקספרס מובייל חולון / WeLab | חנות ומעבדה ניידת לסלולר</bdi></h3><span class="category">תיקון טלפונים</span><p>אוסישקין 2 · חולון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.8</strong></div><div>306 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972533733455">053-373-3455</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972533733455" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק אקספרס מובייל חולון / WeLab | חנות ומעבדה ניידת לסלולר">וואטסאפ</a> <a href="https://www.google.com/maps?cid=16229160394961270834" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · אקספרס מובייל חולון / WeLab | חנות ומעבדה ניידת לסלולר">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijfyo1iija" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%90%D7%A7%D7%A1%D7%A4%D7%A8%D7%A1+%D7%9E%D7%95%D7%91%D7%99%D7%99%D7%9C+%D7%97%D7%95%D7%9C%D7%95%D7%9F+%2F+WeLab+%D7%97%D7%95%D7%9C%D7%95%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="כפר סבא">
+  <div class="identity"><h3><bdi>מספרת ראש צעיר ביטאן הווארד</bdi></h3><span class="category">מספרת גברים</span><p>משעול גיל 1 · כפר סבא</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.5</strong></div><div>276 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972528077758">052-807-7758</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972528077758" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק מספרת ראש צעיר ביטאן הווארד">וואטסאפ</a> <a href="https://www.google.com/maps?cid=16776511857715481196" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · מספרת ראש צעיר ביטאן הווארד">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chij95fjcuc4" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%9E%D7%A1%D7%A4%D7%A8%D7%AA+%D7%A8%D7%90%D7%A9+%D7%A6%D7%A2%D7%99%D7%A8+%D7%91%D7%99%D7%98%D7%90%D7%9F+%D7%94%D7%95%D7%95%D7%90%D7%A8%D7%93+%D7%9B%D7%A4%D7%A8+%D7%A1%D7%91%D7%90" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="בני ברק">
+  <div class="identity"><h3><bdi>רפאל הספר</bdi></h3><span class="category">מספרת גברים</span><p>הרב ש&quot;ך 66 · בני ברק</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>271 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972547855585">054-785-5585</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972547855585" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק רפאל הספר">וואטסאפ</a> <a href="https://www.google.com/maps?cid=4060753293338280471" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · רפאל הספר">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijmapx0cbk" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A8%D7%A4%D7%90%D7%9C+%D7%94%D7%A1%D7%A4%D7%A8+%D7%91%D7%A0%D7%99+%D7%91%D7%A8%D7%A7" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="אשקלון">
+  <div class="identity"><h3><bdi>עדן סלולר</bdi></h3><span class="category">תיקון טלפונים</span><p>הרצל 31 · אשקלון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>266 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972533388560">053-338-8560</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972533388560" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק עדן סלולר">וואטסאפ</a> <a href="https://www.google.com/maps?cid=17961448373814817608" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · עדן סלולר">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijrf5bxxgc" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A2%D7%93%D7%9F+%D7%A1%D7%9C%D7%95%D7%9C%D7%A8+%D7%90%D7%A9%D7%A7%D7%9C%D7%95%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="רחובות">
+  <div class="identity"><h3><bdi>עידן לוי עיצוב שיער</bdi></h3><span class="category">מספרה</span><p>הרצל 130 · רחובות</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.7</strong></div><div>239 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972526690945">052-669-0945</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972526690945" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק עידן לוי עיצוב שיער">וואטסאפ</a> <a href="https://www.google.com/maps?cid=17784433698728781280" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · עידן לוי עיצוב שיער">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chij0anedym3" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A2%D7%99%D7%93%D7%9F+%D7%9C%D7%95%D7%99+%D7%A2%D7%99%D7%A6%D7%95%D7%91+%D7%A9%D7%99%D7%A2%D7%A8+%D7%A8%D7%97%D7%95%D7%91%D7%95%D7%AA" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="נתניה">
+  <div class="identity"><h3><bdi>צ&#x27;פלין מספרת כלבים | Груминг Салон «Чаплин» | Chaplin Grooming</bdi></h3><span class="category">טיפוח חיות מחמד</span><p>א.ד. גורדון 3, נתניה, 42288 · נתניה</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.8</strong></div><div>223 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972553191906">055-319-1906</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972553191906" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק צ&#x27;פלין מספרת כלבים | Груминг Салон «Чаплин» | Chaplin Grooming">וואטסאפ</a> <a href="https://www.google.com/maps?cid=14395519182832762778" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · צ&#x27;פלין מספרת כלבים | Груминг Салон «Чаплин» | Chaplin Grooming">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijluhlxdl" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A6%27%D7%A4%D7%9C%D7%99%D7%9F+%D7%9E%D7%A1%D7%A4%D7%A8%D7%AA+%D7%9B%D7%9C%D7%91%D7%99%D7%9D+%D7%A0%D7%AA%D7%A0%D7%99%D7%94" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="פתח תקווה">
+  <div class="identity"><h3><bdi>מובייל פקטורי שירותי מעבדה לסלולר אם המושבות פתח תקווה - Mobile Factory Phone Lab Service Em HaMoshavot Petah Tikva</bdi></h3><span class="category">תיקון טלפונים</span><p>ראשון לציון 1, פתח תקווה, 49723 · פתח תקווה</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.8</strong></div><div>221 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972559202000">055-920-2000</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972559202000" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק מובייל פקטורי שירותי מעבדה לסלולר אם המושבות פתח תקווה - Mobile Factory Phone Lab Service Em HaMoshavot Petah Tikva">וואטסאפ</a> <a href="https://www.google.com/maps?cid=13562459638023643838" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · מובייל פקטורי שירותי מעבדה לסלולר אם המושבות פתח תקווה - Mobile Factory Phone Lab Service Em HaMoshavot Petah Tikva">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chiji2tbzoo3" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%9E%D7%95%D7%91%D7%99%D7%99%D7%9C+%D7%A4%D7%A7%D7%98%D7%95%D7%A8%D7%99+%D7%A9%D7%99%D7%A8%D7%95%D7%AA%D7%99+%D7%9E%D7%A2%D7%91%D7%93%D7%94+%D7%9C%D7%A1%D7%9C%D7%95%D7%9C%D7%A8+%D7%90%D7%9D+%D7%94%D7%9E%D7%95%D7%A9%D7%91%D7%95%D7%AA+%D7%A4%D7%AA%D7%97+%D7%AA%D7%A7%D7%95%D7%95%D7%94+-+Mobile+Factory+Phone+La+%D7%A4%D7%AA%D7%97+%D7%AA%D7%A7%D7%95%D7%95%D7%94" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="חולון">
+  <div class="identity"><h3><bdi>שטיפת מכוניות בחולון מגיק וואש</bdi></h3><span class="category">שטיפת רכב</span><p>דרך השבעה 20 · חולון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.6</strong></div><div>221 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972529661833">052-966-1833</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972529661833" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק שטיפת מכוניות בחולון מגיק וואש">וואטסאפ</a> <a href="https://www.google.com/maps?cid=1436594224207899729" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · שטיפת מכוניות בחולון מגיק וואש">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijcb9a5tl" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A9%D7%98%D7%99%D7%A4%D7%AA+%D7%9E%D7%9B%D7%95%D7%A0%D7%99%D7%95%D7%AA+%D7%91%D7%97%D7%95%D7%9C%D7%95%D7%9F+%D7%9E%D7%92%D7%99%D7%A7+%D7%95%D7%95%D7%90%D7%A9+%D7%97%D7%95%D7%9C%D7%95%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="רמת גן">
+  <div class="identity"><h3><bdi>Titi - M להבליט את היופי בשיערך</bdi></h3><span class="category">מספרה</span><p>דרך נגבה 35 · רמת גן</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>214 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972547773306">054-777-3306</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972547773306" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק Titi - M להבליט את היופי בשיערך">וואטסאפ</a> <a href="https://www.google.com/maps?cid=13735537263500732518" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · Titi - M להבליט את היופי בשיערך">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chij58kfbzdl" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=Titi+-+M+%D7%9C%D7%94%D7%91%D7%9C%D7%99%D7%98+%D7%90%D7%AA+%D7%94%D7%99%D7%95%D7%A4%D7%99+%D7%91%D7%A9%D7%99%D7%A2%D7%A8%D7%9A+%D7%A8%D7%9E%D7%AA+%D7%92%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="באר שבע">
+  <div class="identity"><h3><bdi>נתיב טכנולוגי - מעבדת גיימינג קונסולה ומחשבים</bdi></h3><span class="category">תיקון מחשבים</span><p>שדרות ירושלים 31 · באר שבע</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>209 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972547207985">054-720-7985</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972547207985" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק נתיב טכנולוגי - מעבדת גיימינג קונסולה ומחשבים">וואטסאפ</a> <a href="https://www.google.com/maps?cid=18089704021785477987" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · נתיב טכנולוגי - מעבדת גיימינג קונסולה ומחשבים">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijue2nkn1n" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A0%D7%AA%D7%99%D7%91+%D7%98%D7%9B%D7%A0%D7%95%D7%9C%D7%95%D7%92%D7%99+-+%D7%9E%D7%A2%D7%91%D7%93%D7%AA+%D7%92%D7%99%D7%99%D7%9E%D7%99%D7%A0%D7%92+%D7%A7%D7%95%D7%A0%D7%A1%D7%95%D7%9C%D7%94+%D7%95%D7%9E%D7%97%D7%A9%D7%91%D7%99%D7%9D+%D7%91%D7%90%D7%A8+%D7%A9%D7%91%D7%A2" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="פתח תקווה">
+  <div class="identity"><h3><bdi>סלולר במושבה- חנות הסלולר של אם המושבות</bdi></h3><span class="category">תיקון טלפונים</span><p>רפאל איתן 3 · פתח תקווה</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.7</strong></div><div>200 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972542515025">054-251-5025</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972542515025" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק סלולר במושבה- חנות הסלולר של אם המושבות">וואטסאפ</a> <a href="https://www.google.com/maps?cid=3151743329725711719" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · סלולר במושבה- חנות הסלולר של אם המושבות">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chij4xsyiz82" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A1%D7%9C%D7%95%D7%9C%D7%A8+%D7%91%D7%9E%D7%95%D7%A9%D7%91%D7%94-+%D7%97%D7%A0%D7%95%D7%AA+%D7%94%D7%A1%D7%9C%D7%95%D7%9C%D7%A8+%D7%A9%D7%9C+%D7%90%D7%9D+%D7%94%D7%9E%D7%95%D7%A9%D7%91%D7%95%D7%AA+%D7%A4%D7%AA%D7%97+%D7%AA%D7%A7%D7%95%D7%95%D7%94" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="ירושלים">
+  <div class="identity"><h3><bdi>מוסך הסלולר - חנות ומעבדת סלולר בירושלים</bdi></h3><span class="category">תיקון טלפונים</span><p>בית הדפוס 22 · ירושלים</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.8</strong></div><div>181 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972544477731">054-447-7731</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972544477731" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק מוסך הסלולר - חנות ומעבדת סלולר בירושלים">וואטסאפ</a> <a href="https://www.google.com/maps?cid=14319149493474842702" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · מוסך הסלולר - חנות ומעבדת סלולר בירושלים">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijqtrmuerw" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%9E%D7%95%D7%A1%D7%9A+%D7%94%D7%A1%D7%9C%D7%95%D7%9C%D7%A8+-+%D7%97%D7%A0%D7%95%D7%AA+%D7%95%D7%9E%D7%A2%D7%91%D7%93%D7%AA+%D7%A1%D7%9C%D7%95%D7%9C%D7%A8+%D7%91%D7%99%D7%A8%D7%95%D7%A9%D7%9C%D7%99%D7%9D+%D7%99%D7%A8%D7%95%D7%A9%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="בת ים">
+  <div class="identity"><h3><bdi>פנצ&#x27;רית בת ים</bdi></h3><span class="category">צמיגים</span><p>העמל 21 · בת ים</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.8</strong></div><div>180 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972543864201">054-386-4201</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972543864201" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק פנצ&#x27;רית בת ים">וואטסאפ</a> <a href="https://www.google.com/maps?cid=14276380378214540499" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · פנצ&#x27;רית בת ים">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijb8bzzuiz" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A4%D7%A0%D7%A6%27%D7%A8%D7%99%D7%AA+%D7%91%D7%AA+%D7%99%D7%9D+%D7%91%D7%AA+%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="באר שבע">
+  <div class="identity"><h3><bdi>יניב וקנין מספרה</bdi></h3><span class="category">מספרה</span><p>ביאליק 24 · באר שבע</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>178 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972507883995">050-788-3995</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972507883995" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק יניב וקנין מספרה">וואטסאפ</a> <a href="https://www.google.com/maps?cid=989265630474841324" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · יניב וקנין מספרה">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijs7tiglm" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%99%D7%A0%D7%99%D7%91+%D7%95%D7%A7%D7%A0%D7%99%D7%9F+%D7%9E%D7%A1%D7%A4%D7%A8%D7%94+%D7%91%D7%90%D7%A8+%D7%A9%D7%91%D7%A2" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="ירושלים">
+  <div class="identity"><h3><bdi>צמיגי ירושלים תיקון פנצרים</bdi></h3><span class="category">צמיגים</span><p>בית הדפוס 34 · ירושלים</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.7</strong></div><div>170 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972542533257">054-253-3257</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972542533257" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק צמיגי ירושלים תיקון פנצרים">וואטסאפ</a> <a href="https://www.google.com/maps?cid=14890851942581317028" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · צמיגי ירושלים תיקון פנצרים">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijnyptzttx" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A6%D7%9E%D7%99%D7%92%D7%99+%D7%99%D7%A8%D7%95%D7%A9%D7%9C%D7%99%D7%9D+%D7%AA%D7%99%D7%A7%D7%95%D7%9F+%D7%A4%D7%A0%D7%A6%D7%A8%D7%99%D7%9D+%D7%99%D7%A8%D7%95%D7%A9%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="חיפה">
+  <div class="identity"><h3><bdi>מספרת אבי ביטון</bdi></h3><span class="category">מספרת גברים</span><p>שדרות מוריה 23 · חיפה</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>165 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972509107402">050-910-7402</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972509107402" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק מספרת אבי ביטון">וואטסאפ</a> <a href="https://www.google.com/maps?cid=13069052468315883556" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · מספרת אבי ביטון">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijmxidzzi7" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%9E%D7%A1%D7%A4%D7%A8%D7%AA+%D7%90%D7%91%D7%99+%D7%91%D7%99%D7%98%D7%95%D7%9F+%D7%97%D7%99%D7%A4%D7%94" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="ראשון לציון">
+  <div class="identity"><h3><bdi>סטודיו מי האו</bdi></h3><span class="category">מספרת חתולים</span><p>הרצל 64, בסמטה · ראשון לציון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>162 ביקורות</div></div>
+  <div class="contact"><span><bdi>אורלי</bdi></span><a dir="ltr" href="tel:+972507506080">050-750-6080</a></div>
+  <div class="actions"><div class="buttons">
+  <a href="https://wa.me/972507506080" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק סטודיו מי האו"><span aria-hidden="true">◌</span> וואטסאפ</a>
+  <a href="https://www.google.com/maps?cid=10198371233277004064" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · סטודיו מי האו">מפות <span aria-hidden="true">↗</span></a>
+  </div><div class="source"><a href="https://easy.co.il/page/10142719" target="_blank" rel="noopener noreferrer" >איזי</a> · <a href="https://lee.co.il/b/kdoZ9" target="_blank" rel="noopener noreferrer" >כרטיס העסק ב־Lee</a></div></div>
+</li>
+<li class="lead" data-city="הוד השרון">
+  <div class="identity"><h3><bdi>עמליה לגעת ביופי</bdi></h3><span class="category">קוסמטיקה</span><p>גברעם · הוד השרון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>161 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972525600005">052-560-0005</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972525600005" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק עמליה לגעת ביופי">וואטסאפ</a> <a href="https://www.google.com/maps?cid=4024240262520889773" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · עמליה לגעת ביופי">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijsyru5zk3" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A2%D7%9E%D7%9C%D7%99%D7%94+%D7%9C%D7%92%D7%A2%D7%AA+%D7%91%D7%99%D7%95%D7%A4%D7%99+%D7%94%D7%95%D7%93+%D7%94%D7%A9%D7%A8%D7%95%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="גבעתיים">
+  <div class="identity"><h3><bdi>אקי וטלי - עיצוב שיער</bdi></h3><span class="category">מספרה</span><p>כצנלסון 141 · גבעתיים</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>158 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972584041212">058-404-1212</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972584041212" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק אקי וטלי - עיצוב שיער">וואטסאפ</a> <a href="https://www.google.com/maps?cid=17169369837677155164" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · אקי וטלי - עיצוב שיער">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chiju2zvcwzl" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%90%D7%A7%D7%99+%D7%95%D7%98%D7%9C%D7%99+-+%D7%A2%D7%99%D7%A6%D7%95%D7%91+%D7%A9%D7%99%D7%A2%D7%A8+%D7%92%D7%91%D7%A2%D7%AA%D7%99%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="בני ברק">
+  <div class="identity"><h3><bdi>צמיגי ששון</bdi></h3><span class="category">צמיגים</span><p>הירקון 75 · בני ברק</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>156 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972526354134">052-635-4134</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972526354134" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק צמיגי ששון">וואטסאפ</a> <a href="https://www.google.com/maps?cid=8920565215537526153" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · צמיגי ששון">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chij5dkqlidk" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A6%D7%9E%D7%99%D7%92%D7%99+%D7%A9%D7%A9%D7%95%D7%9F+%D7%91%D7%A0%D7%99+%D7%91%D7%A8%D7%A7" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="באר שבע">
+  <div class="identity"><h3><bdi>Cell-IT חנות ומעבדת מחשבים</bdi></h3><span class="category">תיקון מחשבים</span><p>אוסישקין 8 · באר שבע</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>149 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972504985498">050-498-5498</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972504985498" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק Cell-IT חנות ומעבדת מחשבים">וואטסאפ</a> <a href="https://www.google.com/maps?cid=14659988439431743715" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · Cell-IT חנות ומעבדת מחשבים">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijjd0urfhn" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=Cell-IT+%D7%97%D7%A0%D7%95%D7%AA+%D7%95%D7%9E%D7%A2%D7%91%D7%93%D7%AA+%D7%9E%D7%97%D7%A9%D7%91%D7%99%D7%9D+%D7%91%D7%90%D7%A8+%D7%A9%D7%91%D7%A2" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="אשדוד">
+  <div class="identity"><h3><bdi>יהודה אהרוני המרכז לעיצוב שיער, החלקות יפניות ומכון שיזוף</bdi></h3><span class="category">מספרת גברים</span><p>גיא אוני 10 · אשדוד</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>149 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972526165069">052-616-5069</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972526165069" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק יהודה אהרוני המרכז לעיצוב שיער, החלקות יפניות ומכון שיזוף">וואטסאפ</a> <a href="https://www.google.com/maps?cid=1712905975059603265" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · יהודה אהרוני המרכז לעיצוב שיער, החלקות יפניות ומכון שיזוף">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijg54lqogi" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%99%D7%94%D7%95%D7%93%D7%94+%D7%90%D7%94%D7%A8%D7%95%D7%A0%D7%99+%D7%94%D7%9E%D7%A8%D7%9B%D7%96+%D7%9C%D7%A2%D7%99%D7%A6%D7%95%D7%91+%D7%A9%D7%99%D7%A2%D7%A8%2C+%D7%94%D7%97%D7%9C%D7%A7%D7%95%D7%AA+%D7%99%D7%A4%D7%A0%D7%99%D7%95%D7%AA+%D7%95%D7%9E%D7%9B%D7%95%D7%9F+%D7%A9%D7%99%D7%96%D7%95%D7%A3+%D7%90%D7%A9%D7%93%D7%95%D7%93" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="פתח תקווה">
+  <div class="identity"><h3><bdi>Revolution studio - רבולושן סטודיו פתח תקווה</bdi></h3><span class="category">מספרת גברים</span><p>בן ציון גליס 18, פתח תקווה, 49721 · פתח תקווה</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.8</strong></div><div>147 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972548864440">054-886-4440</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972548864440" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק Revolution studio - רבולושן סטודיו פתח תקווה">וואטסאפ</a> <a href="https://www.google.com/maps?cid=9769040704551688162" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · Revolution studio - רבולושן סטודיו פתח תקווה">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijlaqil0g3" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=Revolution+studio+-+%D7%A8%D7%91%D7%95%D7%9C%D7%95%D7%A9%D7%9F+%D7%A1%D7%98%D7%95%D7%93%D7%99%D7%95+%D7%A4%D7%AA%D7%97+%D7%AA%D7%A7%D7%95%D7%95%D7%94+%D7%A4%D7%AA%D7%97+%D7%AA%D7%A7%D7%95%D7%95%D7%94" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="בני ברק">
+  <div class="identity"><h3><bdi>מספרת אוריאל</bdi></h3><span class="category">מספרת גברים</span><p>רחוב ירושלים 28 · בני ברק</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.8</strong></div><div>140 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972526822326">052-682-2326</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972526822326" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק מספרת אוריאל">וואטסאפ</a> <a href="https://www.google.com/maps?cid=1310934238731365464" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · מספרת אוריאל">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijzdodozpk" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%9E%D7%A1%D7%A4%D7%A8%D7%AA+%D7%90%D7%95%D7%A8%D7%99%D7%90%D7%9C+%D7%91%D7%A0%D7%99+%D7%91%D7%A8%D7%A7" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="גבעתיים">
+  <div class="identity"><h3><bdi>מספרת שרון</bdi></h3><span class="category">מספרת גברים</span><p>כצנלסון 32 · גבעתיים</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>140 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972543153148">054-315-3148</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972543153148" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק מספרת שרון">וואטסאפ</a> <a href="https://www.google.com/maps?cid=14945146084223479168" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · מספרת שרון">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijzd0g77pl" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%9E%D7%A1%D7%A4%D7%A8%D7%AA+%D7%A9%D7%A8%D7%95%D7%9F+%D7%92%D7%91%D7%A2%D7%AA%D7%99%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="אשדוד">
+  <div class="identity"><h3><bdi>צמיגי התחנה קוץ פלייס</bdi></h3><span class="category">צמיגים</span><p>האופים · אשדוד</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>137 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972543054884">054-305-4884</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972543054884" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק צמיגי התחנה קוץ פלייס">וואטסאפ</a> <a href="https://www.google.com/maps?cid=15652672996766687739" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · צמיגי התחנה קוץ פלייס">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijx4mg69kj" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A6%D7%9E%D7%99%D7%92%D7%99+%D7%94%D7%AA%D7%97%D7%A0%D7%94+%D7%A7%D7%95%D7%A5+%D7%A4%D7%9C%D7%99%D7%99%D7%A1+%D7%90%D7%A9%D7%93%D7%95%D7%93" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="בת ים">
+  <div class="identity"><h3><bdi>מספרה לכלבים וחתולים של אבי</bdi></h3><span class="category">מספרת כלבים וחתולים</span><p>בלפור 3 · בת ים</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.6</strong></div><div>129 ביקורות</div></div>
+  <div class="contact"><span><bdi>אבי לוי</bdi></span><a dir="ltr" href="tel:+972503684732">050-368-4732</a></div>
+  <div class="actions"><div class="buttons">
+  <a href="https://wa.me/972503684732" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק מספרה לכלבים וחתולים של אבי"><span aria-hidden="true">◌</span> וואטסאפ</a>
+  <a href="https://www.google.com/maps?cid=6737594480274844446" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · מספרה לכלבים וחתולים של אבי">מפות <span aria-hidden="true">↗</span></a>
+  </div><div class="source"><a href="https://easy.co.il/page/9145612" target="_blank" rel="noopener noreferrer" >איזי · שעות פעילות ווואטסאפ</a></div></div>
+</li>
+<li class="lead" data-city="אשקלון">
+  <div class="identity"><h3><bdi>מוסך אביאל מוטורס אשקלון</bdi></h3><span class="category">מוסך</span><p>העופרת 2 · אשקלון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>128 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972547915116">054-791-5116</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972547915116" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק מוסך אביאל מוטורס אשקלון">וואטסאפ</a> <a href="https://www.google.com/maps?cid=298073563105931916" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · מוסך אביאל מוטורס אשקלון">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijr99fftob" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%9E%D7%95%D7%A1%D7%9A+%D7%90%D7%91%D7%99%D7%90%D7%9C+%D7%9E%D7%95%D7%98%D7%95%D7%A8%D7%A1+%D7%90%D7%A9%D7%A7%D7%9C%D7%95%D7%9F+%D7%90%D7%A9%D7%A7%D7%9C%D7%95%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="רמת גן">
+  <div class="identity"><h3><bdi>דולב המחשמל- חשמלאי מוסמך</bdi></h3><span class="category">חשמלאי</span><p>הרכסים 33 · רמת גן</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.8</strong></div><div>128 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972545574058">054-557-4058</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972545574058" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק דולב המחשמל- חשמלאי מוסמך">וואטסאפ</a> <a href="https://www.google.com/maps?cid=11253775305367663380" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · דולב המחשמל- חשמלאי מוסמך">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijy9vaxmfl" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%93%D7%95%D7%9C%D7%91+%D7%94%D7%9E%D7%97%D7%A9%D7%9E%D7%9C-+%D7%97%D7%A9%D7%9E%D7%9C%D7%90%D7%99+%D7%9E%D7%95%D7%A1%D7%9E%D7%9A+%D7%A8%D7%9E%D7%AA+%D7%92%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="חיפה">
+  <div class="identity"><h3><bdi>Ippon שטיפת רכבים</bdi></h3><span class="category">שטיפת רכב</span><p>Lev Hamifrac, ההסתדרות 69 · חיפה</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>114 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972508907105">050-890-7105</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972508907105" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק Ippon שטיפת רכבים">וואטסאפ</a> <a href="https://www.google.com/maps?cid=9047377438658044184" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · Ippon שטיפת רכבים">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijz26pcg2x" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=Ippon+%D7%A9%D7%98%D7%99%D7%A4%D7%AA+%D7%A8%D7%9B%D7%91%D7%99%D7%9D+%D7%97%D7%99%D7%A4%D7%94" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="הרצליה">
+  <div class="identity"><h3><bdi>Good-Phone - גוּד פוֹן הרצליה</bdi></h3><span class="category">תיקון טלפונים</span><p>סוקולוב 46 · הרצליה</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>114 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972587610106">058-761-0106</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972587610106" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק Good-Phone - גוּד פוֹן הרצליה">וואטסאפ</a> <a href="https://www.google.com/maps?cid=4096262958311105643" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · Good-Phone - גוּד פוֹן הרצליה">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijy64hm15j" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=Good-Phone+-+%D7%92%D7%95%D6%BC%D7%93+%D7%A4%D7%95%D6%B9%D7%9F+%D7%94%D7%A8%D7%A6%D7%9C%D7%99%D7%94+%D7%94%D7%A8%D7%A6%D7%9C%D7%99%D7%94" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="ראשון לציון">
+  <div class="identity"><h3><bdi>גזעוזלי ברבר שופ</bdi></h3><span class="category">מספרת גברים</span><p>חלוצי יסוד המעלה 5 · ראשון לציון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.6</strong></div><div>111 ביקורות</div></div>
+  <div class="contact"><span><bdi>עוז</bdi></span><a dir="ltr" href="tel:+972544244065">054-424-4065</a></div>
+  <div class="actions"><div class="buttons">
+  <a href="https://wa.me/972544244065" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק גזעוזלי ברבר שופ · זמינות לא אומתה"><span aria-hidden="true">◌</span> וואטסאפ</a>
+  <a href="https://www.google.com/maps?cid=7969674647242112949" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · גזעוזלי ברבר שופ">מפות <span aria-hidden="true">↗</span></a>
+  </div><div class="source">וואטסאפ טרם אומת · <a href="https://easy.co.il/page/26337796" target="_blank" rel="noopener noreferrer" >איזי</a></div></div>
+</li>
+<li class="lead" data-city="הרצליה">
+  <div class="identity"><h3><bdi>iBarbershop By CuCkooNesT - קן הקוקיה</bdi></h3><span class="category">מספרה</span><p>סוקולוב 55 · הרצליה</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.7</strong></div><div>107 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972525070507">052-507-0507</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972525070507" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק iBarbershop By CuCkooNesT - קן הקוקיה">וואטסאפ</a> <a href="https://www.google.com/maps?cid=15268977086344267241" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · iBarbershop By CuCkooNesT - קן הקוקיה">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijewtlfati" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=iBarbershop+By+CuCkooNesT+-+%D7%A7%D7%9F+%D7%94%D7%A7%D7%95%D7%A7%D7%99%D7%94+%D7%94%D7%A8%D7%A6%D7%9C%D7%99%D7%94" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="כפר יונה">
+  <div class="identity"><h3><bdi>אודל פון - חנות טלפונים בכפר יונה | חנות פלאפונים | תיקון טלפונים | מעבדת סלולר</bdi></h3><span class="category">תיקון טלפונים</span><p>נחל שובל 6 · כפר יונה</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>100 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972532542555">053-254-2555</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972532542555" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק אודל פון - חנות טלפונים בכפר יונה | חנות פלאפונים | תיקון טלפונים | מעבדת סלולר">וואטסאפ</a> <a href="https://www.google.com/maps?cid=9243931860935178111" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · אודל פון - חנות טלפונים בכפר יונה | חנות פלאפונים | תיקון טלפונים | מעבדת סלולר">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijzzwiqy0v" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%90%D7%95%D7%93%D7%9C+%D7%A4%D7%95%D7%9F+-+%D7%97%D7%A0%D7%95%D7%AA+%D7%98%D7%9C%D7%A4%D7%95%D7%A0%D7%99%D7%9D+%D7%91%D7%9B%D7%A4%D7%A8+%D7%99%D7%95%D7%A0%D7%94+%D7%9B%D7%A4%D7%A8+%D7%99%D7%95%D7%A0%D7%94" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="ירושלים">
+  <div class="identity"><h3><bdi>ולריה יחזקאלי קוסמטיקאית</bdi></h3><span class="category">קוסמטיקה</span><p>קניון הדר, גנרל פייר קניג 26 · ירושלים</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>99 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972544456494">054-445-6494</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972544456494" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק ולריה יחזקאלי קוסמטיקאית">וואטסאפ</a> <a href="https://www.google.com/maps?cid=15665638196808638124" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · ולריה יחזקאלי קוסמטיקאית">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijowrdqctx" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%95%D7%9C%D7%A8%D7%99%D7%94+%D7%99%D7%97%D7%96%D7%A7%D7%90%D7%9C%D7%99+%D7%A7%D7%95%D7%A1%D7%9E%D7%98%D7%99%D7%A7%D7%90%D7%99%D7%AA+%D7%99%D7%A8%D7%95%D7%A9%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="רמת גן">
+  <div class="identity"><h3><bdi>טכנאי מחשבים ברמת גן מני טכנאי מחשבים</bdi></h3><span class="category">תיקון מחשבים</span><p>IL 5234114, טרומן 12 · רמת גן</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>92 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972509995578">050-999-5578</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972509995578" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק טכנאי מחשבים ברמת גן מני טכנאי מחשבים">וואטסאפ</a> <a href="https://www.google.com/maps?cid=10529599036561055471" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · טכנאי מחשבים ברמת גן מני טכנאי מחשבים">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijh3bljvk" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%98%D7%9B%D7%A0%D7%90%D7%99+%D7%9E%D7%97%D7%A9%D7%91%D7%99%D7%9D+%D7%91%D7%A8%D7%9E%D7%AA+%D7%92%D7%9F+%D7%9E%D7%A0%D7%99+%D7%98%D7%9B%D7%A0%D7%90%D7%99+%D7%9E%D7%97%D7%A9%D7%91%D7%99%D7%9D+%D7%A8%D7%9E%D7%AA+%D7%92%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="נתניה">
+  <div class="identity"><h3><bdi>סמוק פון-DOG PHONE</bdi></h3><span class="category">תיקון טלפונים</span><p>אלון צבי 20 · נתניה</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.6</strong></div><div>92 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972559865555">055-986-5555</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972559865555" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק סמוק פון-DOG PHONE">וואטסאפ</a> <a href="https://www.google.com/maps?cid=3441957744114083717" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · סמוק פון-DOG PHONE">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijrxc1qpq" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A1%D7%9E%D7%95%D7%A7+%D7%A4%D7%95%D7%9F-DOG+PHONE+%D7%A0%D7%AA%D7%A0%D7%99%D7%94" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="הוד השרון">
+  <div class="identity"><h3><bdi>מספרת מיקי</bdi></h3><span class="category">מספרה</span><p>בני ברית 4 · הוד השרון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>90 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972505489800">050-548-9800</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972505489800" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק מספרת מיקי">וואטסאפ</a> <a href="https://www.google.com/maps?cid=18303775017636734786" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · מספרת מיקי">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijx73xi4k3" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%9E%D7%A1%D7%A4%D7%A8%D7%AA+%D7%9E%D7%99%D7%A7%D7%99+%D7%94%D7%95%D7%93+%D7%94%D7%A9%D7%A8%D7%95%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="גבעתיים">
+  <div class="identity"><h3><bdi>אייל וסנדי</bdi></h3><span class="category">מספרת גברים</span><p>סירקין 12 · גבעתיים</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>88 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972542222994">054-222-2994</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972542222994" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק אייל וסנדי">וואטסאפ</a> <a href="https://www.google.com/maps?cid=5493107804503180301" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · אייל וסנדי">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijvfkpt7rl" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%90%D7%99%D7%99%D7%9C+%D7%95%D7%A1%D7%A0%D7%93%D7%99+%D7%92%D7%91%D7%A2%D7%AA%D7%99%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="באר שבע">
+  <div class="identity"><h3><bdi>פינוקי לשוקי</bdi></h3><span class="category">טיפוח חיות מחמד</span><p>הפלמ&quot;ח 61 · באר שבע</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>87 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972508648154">050-864-8154</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972508648154" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק פינוקי לשוקי">וואטסאפ</a> <a href="https://www.google.com/maps?cid=8473266591913388308" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · פינוקי לשוקי">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijo5etlhbm" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A4%D7%99%D7%A0%D7%95%D7%A7%D7%99+%D7%9C%D7%A9%D7%95%D7%A7%D7%99+%D7%91%D7%90%D7%A8+%D7%A9%D7%91%D7%A2" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="בת ים">
+  <div class="identity"><h3><bdi>יקיר מלול עיצוב שיער אקדמיה</bdi></h3><span class="category">מספרה</span><p>דרך מנחם בגין 1 · בת ים</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.7</strong></div><div>84 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972542282743">054-228-2743</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972542282743" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק יקיר מלול עיצוב שיער אקדמיה">וואטסאפ</a> <a href="https://www.google.com/maps?cid=16998655884015219511" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · יקיר מלול עיצוב שיער אקדמיה">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chij62f0ggz" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%99%D7%A7%D7%99%D7%A8+%D7%9E%D7%9C%D7%95%D7%9C+%D7%A2%D7%99%D7%A6%D7%95%D7%91+%D7%A9%D7%99%D7%A2%D7%A8+%D7%90%D7%A7%D7%93%D7%9E%D7%99%D7%94+%D7%91%D7%AA+%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="אשדוד">
+  <div class="identity"><h3><bdi>מוסך ניקולאי מוסך באשדוד</bdi></h3><span class="category">מוסך</span><p>העבודה 54 · אשדוד</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>81 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972528198923">052-819-8923</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972528198923" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק מוסך ניקולאי מוסך באשדוד">וואטסאפ</a> <a href="https://www.google.com/maps?cid=11439161943597337805" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · מוסך ניקולאי מוסך באשדוד">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chij80jorecj" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%9E%D7%95%D7%A1%D7%9A+%D7%A0%D7%99%D7%A7%D7%95%D7%9C%D7%90%D7%99+%D7%9E%D7%95%D7%A1%D7%9A+%D7%91%D7%90%D7%A9%D7%93%D7%95%D7%93+%D7%90%D7%A9%D7%93%D7%95%D7%93" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="כפר סבא">
+  <div class="identity"><h3><bdi>אלינה ספרינה - טיפוח כלבים מקצועי</bdi></h3><span class="category">טיפוח חיות מחמד</span><p>גורדון 18 · כפר סבא</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.8</strong></div><div>78 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972549404580">054-940-4580</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972549404580" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק אלינה ספרינה - טיפוח כלבים מקצועי">וואטסאפ</a> <a href="https://www.google.com/maps?cid=10979647719118761325" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · אלינה ספרינה - טיפוח כלבים מקצועי">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijveywkp45" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%90%D7%9C%D7%99%D7%A0%D7%94+%D7%A1%D7%A4%D7%A8%D7%99%D7%A0%D7%94+-+%D7%98%D7%99%D7%A4%D7%95%D7%97+%D7%9B%D7%9C%D7%91%D7%99%D7%9D+%D7%9E%D7%A7%D7%A6%D7%95%D7%A2%D7%99+%D7%9B%D7%A4%D7%A8+%D7%A1%D7%91%D7%90" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="הוד השרון">
+  <div class="identity"><h3><bdi>אסי חכמון מורה נהיגה</bdi></h3><span class="category">לימוד נהיגה</span><p>הרצל 5 · הוד השרון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>78 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972526745699">052-674-5699</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972526745699" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק אסי חכמון מורה נהיגה">וואטסאפ</a> <a href="https://www.google.com/maps?cid=16577636994733280153" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · אסי חכמון מורה נהיגה">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijq6kbly" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%90%D7%A1%D7%99+%D7%97%D7%9B%D7%9E%D7%95%D7%9F+%D7%9E%D7%95%D7%A8%D7%94+%D7%A0%D7%94%D7%99%D7%92%D7%94+%D7%94%D7%95%D7%93+%D7%94%D7%A9%D7%A8%D7%95%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="אשדוד">
+  <div class="identity"><h3><bdi>Paw - מספרת כלבים וחתולים, וטיפולי טיפוח</bdi></h3><span class="category">טיפוח חיות מחמד</span><p>דוד המלך 18 · אשדוד</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>77 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972537177248">053-717-7248</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972537177248" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק Paw - מספרת כלבים וחתולים, וטיפולי טיפוח">וואטסאפ</a> <a href="https://www.google.com/maps?cid=9732731419507450321" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · Paw - מספרת כלבים וחתולים, וטיפולי טיפוח">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijfc3o6bmz" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=Paw+-+%D7%9E%D7%A1%D7%A4%D7%A8%D7%AA+%D7%9B%D7%9C%D7%91%D7%99%D7%9D+%D7%95%D7%97%D7%AA%D7%95%D7%9C%D7%99%D7%9D%2C+%D7%95%D7%98%D7%99%D7%A4%D7%95%D7%9C%D7%99+%D7%98%D7%99%D7%A4%D7%95%D7%97+%D7%90%D7%A9%D7%93%D7%95%D7%93" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="כפר סבא">
+  <div class="identity"><h3><bdi>משה אופנועים (לובטון)</bdi></h3><span class="category">לימוד נהיגה</span><p>פינת הפועל, בן יהודה · כפר סבא</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.7</strong></div><div>75 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972525005001">052-500-5001</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972525005001" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק משה אופנועים (לובטון)">וואטסאפ</a> <a href="https://www.google.com/maps?cid=12451536281536324977" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · משה אופנועים (לובטון)">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijbzbzgqa5" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%9E%D7%A9%D7%94+%D7%90%D7%95%D7%A4%D7%A0%D7%95%D7%A2%D7%99%D7%9D+%28%D7%9C%D7%95%D7%91%D7%98%D7%95%D7%9F%29+%D7%9B%D7%A4%D7%A8+%D7%A1%D7%91%D7%90" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="באר שבע">
+  <div class="identity"><h3><bdi>UNDERCUT</bdi></h3><span class="category">מספרת גברים</span><p>מצדה 31 (כניסה אחורית, באר שבע, 88888 · באר שבע</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>73 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972523770765">052-377-0765</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972523770765" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק UNDERCUT">וואטסאפ</a> <a href="https://www.google.com/maps?cid=18397784474487465538" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · UNDERCUT">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chij4zqo0cbn" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=UnderCut+%D7%9E%D7%A1%D7%A4%D7%A8%D7%94+%D7%91%D7%91%D7%90%D7%A8+%D7%A9%D7%91%D7%A2%2C+%D7%99%D7%A2%D7%A7%D7%91+%D7%91%D7%90%D7%A8+%D7%A9%D7%91%D7%A2" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="גבעתיים">
+  <div class="identity"><h3><bdi>Rami Frut - Barber Shop | ברבר שופ גבעתיים</bdi></h3><span class="category">מספרת גברים</span><p>כצנלסון 154 · גבעתיים</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.5</strong></div><div>72 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972503331734">050-333-1734</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972503331734" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק Rami Frut - Barber Shop | ברבר שופ גבעתיים">וואטסאפ</a> <a href="https://www.google.com/maps?cid=10681250667545592029" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · Rami Frut - Barber Shop | ברבר שופ גבעתיים">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijv3aykgtl" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=Rami+Frut+-+Barber+Shop+%D7%92%D7%91%D7%A2%D7%AA%D7%99%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="חיפה">
+  <div class="identity"><h3><bdi>דבורה פריווה סלון היופי שלך בחיפה</bdi></h3><span class="category">קוסמטיקה</span><p>טרומפלדור רחוב · חיפה</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>72 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972548035466">054-803-5466</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972548035466" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק דבורה פריווה סלון היופי שלך בחיפה">וואטסאפ</a> <a href="https://www.google.com/maps?cid=13060671785958553265" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · דבורה פריווה סלון היופי שלך בחיפה">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijbdbsfqc7" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%93%D7%91%D7%95%D7%A8%D7%94+%D7%A4%D7%A8%D7%99%D7%95%D7%95%D7%94+%D7%A1%D7%9C%D7%95%D7%9F+%D7%94%D7%99%D7%95%D7%A4%D7%99+%D7%A9%D7%9C%D7%9A+%D7%91%D7%97%D7%99%D7%A4%D7%94+%D7%97%D7%99%D7%A4%D7%94" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="חולון">
+  <div class="identity"><h3><bdi>אלי ברכה פחחות וצבע לרכב</bdi></h3><span class="category">פחחות וצבע</span><p>הסתת 3 · חולון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.8</strong></div><div>72 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972506333383">050-633-3383</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972506333383" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק אלי ברכה פחחות וצבע לרכב">וואטסאפ</a> <a href="https://www.google.com/maps?cid=14689389552972944097" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · אלי ברכה פחחות וצבע לרכב">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijdvxbqi21" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%90%D7%9C%D7%99+%D7%91%D7%A8%D7%9B%D7%94+%D7%A4%D7%97%D7%97%D7%95%D7%AA+%D7%95%D7%A6%D7%91%D7%A2+%D7%9C%D7%A8%D7%9B%D7%91+%D7%97%D7%95%D7%9C%D7%95%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="רחובות">
+  <div class="identity"><h3><bdi>איתי בר מורה נהיגה ברחובות</bdi></h3><span class="category">לימוד נהיגה</span><p>בנימין 15 · רחובות</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.6</strong></div><div>72 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972527310032">052-731-0032</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972527310032" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק איתי בר מורה נהיגה ברחובות">וואטסאפ</a> <a href="https://www.google.com/maps?cid=10869016324706561552" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · איתי בר מורה נהיגה ברחובות">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijc7uwmga3" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%90%D7%99%D7%AA%D7%99+%D7%91%D7%A8+%D7%9E%D7%95%D7%A8%D7%94+%D7%A0%D7%94%D7%99%D7%92%D7%94+%D7%91%D7%A8%D7%97%D7%95%D7%91%D7%95%D7%AA+%D7%A8%D7%97%D7%95%D7%91%D7%95%D7%AA" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="גבעתיים">
+  <div class="identity"><h3><bdi>שלומי עיצוב שיער גבעתיים</bdi></h3><span class="category">מספרה</span><p>כצנלסון 21, גבעתיים, 53215 · גבעתיים</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.8</strong></div><div>71 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972506667336">050-666-7336</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972506667336" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק שלומי עיצוב שיער גבעתיים">וואטסאפ</a> <a href="https://www.google.com/maps?cid=4735957322972965558" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · שלומי עיצוב שיער גבעתיים">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijtbu80anl" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A9%D7%9C%D7%95%D7%9E%D7%99+%D7%A2%D7%99%D7%A6%D7%95%D7%91+%D7%A9%D7%99%D7%A2%D7%A8+%D7%92%D7%91%D7%A2%D7%AA%D7%99%D7%99%D7%9D+%D7%92%D7%91%D7%A2%D7%AA%D7%99%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="ראשון לציון">
+  <div class="identity"><h3><bdi>צמיגי גלגלי העיר בבעלות רועי בצלאל</bdi></h3><span class="category">צמיגים</span><p>בנימין שמוטקין 20 · ראשון לציון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>70 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972503530200">050-353-0200</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972503530200" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק צמיגי גלגלי העיר בבעלות רועי בצלאל">וואטסאפ</a> <a href="https://www.google.com/maps?cid=14410308563203518615" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · צמיגי גלגלי העיר בבעלות רועי בצלאל">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chij7dbmx6m1" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A6%D7%9E%D7%99%D7%92%D7%99+%D7%92%D7%9C%D7%92%D7%9C%D7%99+%D7%94%D7%A2%D7%99%D7%A8+%D7%91%D7%91%D7%A2%D7%9C%D7%95%D7%AA+%D7%A8%D7%95%D7%A2%D7%99+%D7%91%D7%A6%D7%9C%D7%90%D7%9C+%D7%A8%D7%90%D7%A9%D7%95%D7%9F+%D7%9C%D7%A6%D7%99%D7%95%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="בת ים">
+  <div class="identity"><h3><bdi>אהרון הספר</bdi></h3><span class="category">מספרת גברים</span><p>אנה פרנק 29 · בת ים</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>70 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972503213232">050-321-3232</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972503213232" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק אהרון הספר">וואטסאפ</a> <a href="https://www.google.com/maps?cid=6389997720787549979" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · אהרון הספר">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijbaifubsz" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%90%D7%94%D7%A8%D7%95%D7%9F+%D7%94%D7%A1%D7%A4%D7%A8+%D7%91%D7%AA+%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="רחובות">
+  <div class="identity"><h3><bdi>גיא עמר הפקות מוסיקליות</bdi></h3><span class="category">תקליטנות</span><p>קלמן גבריאלוב 39 · רחובות</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>70 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972528484840">052-848-4840</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972528484840" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק גיא עמר הפקות מוסיקליות">וואטסאפ</a> <a href="https://www.google.com/maps?cid=13134283523425081298" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · גיא עמר הפקות מוסיקליות">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijrviy0i3" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%92%D7%99%D7%90+%D7%A2%D7%9E%D7%A8+%D7%94%D7%A4%D7%A7%D7%95%D7%AA+%D7%9E%D7%95%D7%A1%D7%99%D7%A7%D7%9C%D7%99%D7%95%D7%AA+%D7%A8%D7%97%D7%95%D7%91%D7%95%D7%AA" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="גבעתיים">
+  <div class="identity"><h3><bdi>מכון נירית -מרגיש לך יופי</bdi></h3><span class="category">קוסמטיקה</span><p>כצנלסון 21 · גבעתיים</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>69 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972523410680">052-341-0680</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972523410680" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק מכון נירית -מרגיש לך יופי">וואטסאפ</a> <a href="https://www.google.com/maps?cid=1787055128132079949" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · מכון נירית -מרגיש לך יופי">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijvyujgltl" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%9E%D7%9B%D7%95%D7%9F+%D7%A0%D7%99%D7%A8%D7%99%D7%AA+-%D7%9E%D7%A8%D7%92%D7%99%D7%A9+%D7%9C%D7%9A+%D7%99%D7%95%D7%A4%D7%99+%D7%92%D7%91%D7%A2%D7%AA%D7%99%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="כפר סבא">
+  <div class="identity"><h3><bdi>טכנאי מחשבים גיא תיקון מחשב בכפר סבא</bdi></h3><span class="category">תיקון מחשבים</span><p>נחמיה 6 · כפר סבא</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>68 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972508090526">050-809-0526</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972508090526" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק טכנאי מחשבים גיא תיקון מחשב בכפר סבא">וואטסאפ</a> <a href="https://www.google.com/maps?cid=18146286881103986019" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · טכנאי מחשבים גיא תיקון מחשב בכפר סבא">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijlw7m7hy5" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%98%D7%9B%D7%A0%D7%90%D7%99+%D7%9E%D7%97%D7%A9%D7%91%D7%99%D7%9D+%D7%92%D7%99%D7%90+%D7%AA%D7%99%D7%A7%D7%95%D7%9F+%D7%9E%D7%97%D7%A9%D7%91+%D7%91%D7%9B%D7%A4%D7%A8+%D7%A1%D7%91%D7%90+%D7%9B%D7%A4%D7%A8+%D7%A1%D7%91%D7%90" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="באר שבע">
+  <div class="identity"><h3><bdi>MagicNails</bdi></h3><span class="category">מניקור ופדיקור</span><p>הדסה 92 · באר שבע</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.6</strong></div><div>68 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972544606961">054-460-6961</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972544606961" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק MagicNails">וואטסאפ</a> <a href="https://www.google.com/maps?cid=17617960929619127328" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · MagicNails">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chije6kvwxzm" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=MagicNails+%D7%91%D7%90%D7%A8+%D7%A9%D7%91%D7%A2" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="נתניה">
+  <div class="identity"><h3><bdi>מספרת שלומי עטר - עיצוב שיער</bdi></h3><span class="category">מספרה</span><p>Moshe hass 5 · נתניה</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.8</strong></div><div>64 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972543971050">054-397-1050</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972543971050" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק מספרת שלומי עטר - עיצוב שיער">וואטסאפ</a> <a href="https://www.google.com/maps?cid=16894471288959788617" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · מספרת שלומי עטר - עיצוב שיער">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijjdja76pq" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%9E%D7%A1%D7%A4%D7%A8%D7%AA+%D7%A9%D7%9C%D7%95%D7%9E%D7%99+%D7%A2%D7%98%D7%A8+-+%D7%A2%D7%99%D7%A6%D7%95%D7%91+%D7%A9%D7%99%D7%A2%D7%A8+%D7%A0%D7%AA%D7%A0%D7%99%D7%94" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="חיפה">
+  <div class="identity"><h3><bdi>Hanna Vi Nails</bdi></h3><span class="category">מניקור ופדיקור</span><p>כיכר מאירהוף 4 · חיפה</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>63 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972546478515">054-647-8515</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972546478515" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק Hanna Vi Nails">וואטסאפ</a> <a href="https://www.google.com/maps?cid=7796387674078950548" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · Hanna Vi Nails">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijdt0ykb0q" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=Hanna+Vi+Nails+%D7%97%D7%99%D7%A4%D7%94" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="רמת גן">
+  <div class="identity"><h3><bdi>צמיגי יהלום</bdi></h3><span class="category">צמיגים</span><p>רחוב זאב ז&#x27;בוטינסקי 4 · רמת גן</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.5</strong></div><div>62 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972507513224">050-751-3224</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972507513224" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק צמיגי יהלום">וואטסאפ</a> <a href="https://www.google.com/maps?cid=7577279899578056271" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · צמיגי יהלום">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chij0wpwpmll" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A6%D7%9E%D7%99%D7%92%D7%99+%D7%99%D7%94%D7%9C%D7%95%D7%9D+%D7%A8%D7%9E%D7%AA+%D7%92%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="בת ים">
+  <div class="identity"><h3><bdi>פרינט סטור‬</bdi></h3><span class="category">תיקון טלפונים</span><p>בלפור 69 · בת ים</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.5</strong></div><div>58 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972545675601">054-567-5601</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972545675601" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק פרינט סטור‬">וואטסאפ</a> <a href="https://www.google.com/maps?cid=6930764388117578222" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · פרינט סטור‬">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chij0azqwt2z" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A4%D7%A8%D7%99%D7%A0%D7%98+%D7%A1%D7%98%D7%95%D7%A8%E2%80%AC%E2%80%8E+%D7%91%D7%AA+%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="בת ים">
+  <div class="identity"><h3><bdi>מוטי עיצוב שיער</bdi></h3><span class="category">מספרה</span><p>בלפור 116 · בת ים</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>55 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972523080999">052-308-0999</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972523080999" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק מוטי עיצוב שיער">וואטסאפ</a> <a href="https://www.google.com/maps?cid=8384940324508803520" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · מוטי עיצוב שיער">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chij4avstxcz" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%9E%D7%95%D7%98%D7%99+%D7%A2%D7%99%D7%A6%D7%95%D7%91+%D7%A9%D7%99%D7%A2%D7%A8+%D7%91%D7%AA+%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="חולון">
+  <div class="identity"><h3><bdi>עומר סיני</bdi></h3><span class="category">מספרת גברים</span><p>יהושע חנקין 93 · חולון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>55 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972523937233">052-393-7233</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972523937233" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק עומר סיני">וואטסאפ</a> <a href="https://www.google.com/maps?cid=9208371802947618813" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · עומר סיני">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijnxstxmm1" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A2%D7%95%D7%9E%D7%A8+%D7%A1%D7%99%D7%A0%D7%99+%D7%97%D7%95%D7%9C%D7%95%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="אשקלון">
+  <div class="identity"><h3><bdi>רנלי תקשורת</bdi></h3><span class="category">תיקון טלפונים</span><p>הגבורה 7/24 · אשקלון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>54 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972528462847">052-846-2847</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972528462847" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק רנלי תקשורת">וואטסאפ</a> <a href="https://www.google.com/maps?cid=6889199769079360514" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · רנלי תקשורת">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chij3qyzlqc" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A8%D7%A0%D7%9C%D7%99+%D7%AA%D7%A7%D7%A9%D7%95%D7%A8%D7%AA+%D7%90%D7%A9%D7%A7%D7%9C%D7%95%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="חולון">
+  <div class="identity"><h3><bdi>בניית ציפורניים בחולון - אסנת ניילס</bdi></h3><span class="category">מניקור ופדיקור</span><p>סוקולוב 1 · חולון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.8</strong></div><div>53 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972523837097">052-383-7097</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972523837097" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק בניית ציפורניים בחולון - אסנת ניילס">וואטסאפ</a> <a href="https://www.google.com/maps?cid=3784411887178165896" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · בניית ציפורניים בחולון - אסנת ניילס">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijg2krmzkz" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%91%D7%A0%D7%99%D7%99%D7%AA+%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%A0%D7%99%D7%99%D7%9D+%D7%91%D7%97%D7%95%D7%9C%D7%95%D7%9F+-+%D7%90%D7%A1%D7%A0%D7%AA+%D7%A0%D7%99%D7%99%D7%9C%D7%A1+%D7%97%D7%95%D7%9C%D7%95%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="אשקלון">
+  <div class="identity"><h3><bdi>מספרה באשקלון - נבות אליאס מספרת גברים וילדים באשקלון. מספרת גברים</bdi></h3><span class="category">מספרת גברים</span><p>גושן 4 · אשקלון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>52 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972526622298">052-662-2298</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972526622298" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק מספרה באשקלון - נבות אליאס מספרת גברים וילדים באשקלון. מספרת גברים">וואטסאפ</a> <a href="https://www.google.com/maps?cid=5522668093976484501" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · מספרה באשקלון - נבות אליאס מספרת גברים וילדים באשקלון. מספרת גברים">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijcsh4apkd" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%9E%D7%A1%D7%A4%D7%A8%D7%94+%D7%91%D7%90%D7%A9%D7%A7%D7%9C%D7%95%D7%9F+-+%D7%A0%D7%91%D7%95%D7%AA+%D7%90%D7%9C%D7%99%D7%90%D7%A1+%D7%9E%D7%A1%D7%A4%D7%A8%D7%AA+%D7%92%D7%91%D7%A8%D7%99%D7%9D+%D7%95%D7%99%D7%9C%D7%93%D7%99%D7%9D+%D7%91%D7%90%D7%A9%D7%A7%D7%9C%D7%95%D7%9F.+%D7%9E%D7%A1%D7%A4%D7%A8%D7%AA+%D7%92%D7%91%D7%A8%D7%99%D7%9D+%D7%90%D7%A9%D7%A7%D7%9C%D7%95%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="הוד השרון">
+  <div class="identity"><h3><bdi>וופל&#x27;ס מספרת כלבים</bdi></h3><span class="category">טיפוח חיות מחמד</span><p>הפרסה 6 · הוד השרון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>51 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972528978102">052-897-8102</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972528978102" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק וופל&#x27;ס מספרת כלבים">וואטסאפ</a> <a href="https://www.google.com/maps?cid=14280609681468499850" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · וופל&#x27;ס מספרת כלבים">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijwwqtvbjl" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%95%D7%95%D7%A4%D7%9C%27%D7%A1+%D7%9E%D7%A1%D7%A4%D7%A8%D7%AA+%D7%9B%D7%9C%D7%91%D7%99%D7%9D+%D7%94%D7%95%D7%93+%D7%94%D7%A9%D7%A8%D7%95%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="ראשון לציון">
+  <div class="identity"><h3><bdi>אביעד עיצוב שיער לגברים</bdi></h3><span class="category">מספרת גברים</span><p>ברית יוסף בית&quot;ר 13 · ראשון לציון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.7</strong></div><div>50 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972509194447">050-919-4447</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972509194447" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק אביעד עיצוב שיער לגברים">וואטסאפ</a> <a href="https://www.google.com/maps?cid=4051115219472013963" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · אביעד עיצוב שיער לגברים">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijo7x0jkg0" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%90%D7%91%D7%99%D7%A2%D7%93+%D7%A2%D7%99%D7%A6%D7%95%D7%91+%D7%A9%D7%99%D7%A2%D7%A8+%D7%9C%D7%92%D7%91%D7%A8%D7%99%D7%9D+%D7%A8%D7%90%D7%A9%D7%95%D7%9F+%D7%9C%D7%A6%D7%99%D7%95%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="חולון">
+  <div class="identity"><h3><bdi>R.K. Pet Spa</bdi></h3><span class="category">מספרת כלבים</span><p>סוקולוב 32 · חולון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>49 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972507795597">050-779-5597</a></div>
+  <div class="actions"><div class="buttons">
+  <a href="https://wa.me/972507795597" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק R.K. Pet Spa"><span aria-hidden="true">◌</span> וואטסאפ</a>
+  <a href="https://www.google.com/maps?cid=9047901032583433987" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · R.K. Pet Spa">מפות <span aria-hidden="true">↗</span></a>
+  </div><div class="source"><a href="https://easy.co.il/page/10148719" target="_blank" rel="noopener noreferrer" >איזי</a> · <a href="https://beetle-il.com/pets/grooming/area/tel-aviv/" target="_blank" rel="noopener noreferrer" >חיפושית · וואטסאפ</a></div></div>
+</li>
+<li class="lead" data-city="בני ברק">
+  <div class="identity"><h3><bdi>מספרת יוסי</bdi></h3><span class="category">מספרת גברים</span><p>הרב אברהם יצחק הכהן קוק 21 · בני ברק</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.8</strong></div><div>44 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972527169403">052-716-9403</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972527169403" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק מספרת יוסי">וואטסאפ</a> <a href="https://www.google.com/maps?cid=4344476420461802381" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · מספרת יוסי">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijycfe05l" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%9E%D7%A1%D7%A4%D7%A8%D7%AA+%D7%99%D7%95%D7%A1%D7%99+%D7%91%D7%A0%D7%99+%D7%91%D7%A8%D7%A7" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="קרית טבעון">
+  <div class="identity"><h3><bdi>simsim תספורות לבעלי חיים</bdi></h3><span class="category">טיפוח חיות מחמד</span><p>חנות חיות -פנק אותם, זבולון 1 · קרית טבעון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>42 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972542144205">054-214-4205</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972542144205" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק simsim תספורות לבעלי חיים">וואטסאפ</a> <a href="https://www.google.com/maps?cid=7050085849756953794" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · simsim תספורות לבעלי חיים">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijixxijjs7" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=simsim+%D7%AA%D7%A1%D7%A4%D7%95%D7%A8%D7%95%D7%AA+%D7%9C%D7%91%D7%A2%D7%9C%D7%99+%D7%97%D7%99%D7%99%D7%9D+%D7%A7%D7%A8%D7%99%D7%AA+%D7%98%D7%91%D7%A2%D7%95%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="רמת גן">
+  <div class="identity"><h3><bdi>חשמל נוריאל</bdi></h3><span class="category">חשמלאי</span><p>דרך נגבה 34 · רמת גן</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.7</strong></div><div>42 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972505503088">050-550-3088</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972505503088" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק חשמל נוריאל">וואטסאפ</a> <a href="https://www.google.com/maps?cid=17752095776383583390" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · חשמל נוריאל">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijkywng09k" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%97%D7%A9%D7%9E%D7%9C+%D7%A0%D7%95%D7%A8%D7%99%D7%90%D7%9C+%D7%A8%D7%9E%D7%AA+%D7%92%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="ראשון לציון">
+  <div class="identity"><h3><bdi>Bella Style</bdi></h3><span class="category">מספרת כלבים</span><p>ז׳בוטינסקי 41 · ראשון לציון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>41 ביקורות</div></div>
+  <div class="contact"><span><bdi>חן לרנר</bdi></span><a dir="ltr" href="tel:+972505242994">050-524-2994</a></div>
+  <div class="actions"><div class="buttons">
+  <a href="https://wa.me/972505242994" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק Bella Style"><span aria-hidden="true">◌</span> וואטסאפ</a>
+  <a href="https://www.google.com/maps?cid=9052544639493577376" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · Bella Style">מפות <span aria-hidden="true">↗</span></a>
+  </div><div class="source"><a href="https://easy.co.il/page/10121443" target="_blank" rel="noopener noreferrer" >איזי</a> · <a href="https://welp.co.il/business/g-chijgdgtmpc1" target="_blank" rel="noopener noreferrer" >Welp · וואטסאפ</a></div></div>
+</li>
+<li class="lead" data-city="ירושלים">
+  <div class="identity"><h3><bdi>Merizian&#x27;s Nailux</bdi></h3><span class="category">מניקור ופדיקור</span><p>שלמה המלך 14 · ירושלים</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>41 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972502544824">050-254-4824</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972502544824" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק Merizian&#x27;s Nailux">וואטסאפ</a> <a href="https://www.google.com/maps?cid=16063493709686759114" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · Merizian&#x27;s Nailux">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijb4aw1hop" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=Merizian%27s+Nailux+%D7%99%D7%A8%D7%95%D7%A9%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="רחובות">
+  <div class="identity"><h3><bdi>ברחובות מוסך להב פחחות וצבע רחובות</bdi></h3><span class="category">פחחות וצבע</span><p>אזור תעשייה, יצירה 24 · רחובות</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.6</strong></div><div>41 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972523276193">052-327-6193</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972523276193" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק ברחובות מוסך להב פחחות וצבע רחובות">וואטסאפ</a> <a href="https://www.google.com/maps?cid=13168669231007502402" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · ברחובות מוסך להב פחחות וצבע רחובות">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijcyzdeu3" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%91%D7%A8%D7%97%D7%95%D7%91%D7%95%D7%AA+%D7%9E%D7%95%D7%A1%D7%9A+%D7%9C%D7%94%D7%91+%D7%A4%D7%97%D7%97%D7%95%D7%AA+%D7%95%D7%A6%D7%91%D7%A2+%D7%A8%D7%97%D7%95%D7%91%D7%95%D7%AA+%D7%A8%D7%97%D7%95%D7%91%D7%95%D7%AA" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="חיפה">
+  <div class="identity"><h3><bdi>סוניה אמרם - לק ג&#x27;ל מניקור פדיקור רפואי</bdi></h3><span class="category">מניקור ופדיקור</span><p>הצוללת דקר 2 · חיפה</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>41 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972509013957">050-901-3957</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972509013957" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק סוניה אמרם - לק ג&#x27;ל מניקור פדיקור רפואי">וואטסאפ</a> <a href="https://www.google.com/maps?cid=14855838195389349250" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · סוניה אמרם - לק ג&#x27;ל מניקור פדיקור רפואי">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijw16wska7" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A1%D7%95%D7%A0%D7%99%D7%94+%D7%90%D7%9E%D7%A8%D7%9D+-+%D7%9C%D7%A7+%D7%92%27%D7%9C+%D7%9E%D7%A0%D7%99%D7%A7%D7%95%D7%A8+%D7%A4%D7%93%D7%99%D7%A7%D7%95%D7%A8+%D7%A8%D7%A4%D7%95%D7%90%D7%99+%D7%97%D7%99%D7%A4%D7%94" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="רמת גן">
+  <div class="identity"><h3><bdi>ליאת ספרית כלבים-מספרת כלבים וחתולים</bdi></h3><span class="category">טיפוח חיות מחמד</span><p>האשל · רמת גן</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>40 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972535319840">053-531-9840</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972535319840" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק ליאת ספרית כלבים-מספרת כלבים וחתולים">וואטסאפ</a> <a href="https://www.google.com/maps?cid=11049538184120834132" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · ליאת ספרית כלבים-מספרת כלבים וחתולים">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijn7t1ghdl" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%9C%D7%99%D7%90%D7%AA+%D7%A1%D7%A4%D7%A8%D7%99%D7%AA+%D7%9B%D7%9C%D7%91%D7%99%D7%9D-%D7%9E%D7%A1%D7%A4%D7%A8%D7%AA+%D7%9B%D7%9C%D7%91%D7%99%D7%9D+%D7%95%D7%97%D7%AA%D7%95%D7%9C%D7%99%D7%9D+%D7%A8%D7%9E%D7%AA+%D7%92%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="גבעתיים">
+  <div class="identity"><h3><bdi>עמית תורן | Amit Nail Studio | לק ג&#x27;ל גבעתיים</bdi></h3><span class="category">מניקור ופדיקור</span><p>וייצמן 12 · גבעתיים</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>40 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972544521766">054-452-1766</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972544521766" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק עמית תורן | Amit Nail Studio | לק ג&#x27;ל גבעתיים">וואטסאפ</a> <a href="https://www.google.com/maps?cid=2925139294808107296" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · עמית תורן | Amit Nail Studio | לק ג&#x27;ל גבעתיים">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijmxqscgbl" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A2%D7%9E%D7%99%D7%AA+%D7%AA%D7%95%D7%A8%D7%9F+%D7%92%D7%91%D7%A2%D7%AA%D7%99%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="גבעתיים">
+  <div class="identity"><h3><bdi>עדי כרמי - קוסמטיקאית פרא רפואית</bdi></h3><span class="category">קוסמטיקה</span><p>IL 5646001, ריינס 1 · גבעתיים</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>39 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972543451181">054-345-1181</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972543451181" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק עדי כרמי - קוסמטיקאית פרא רפואית">וואטסאפ</a> <a href="https://www.google.com/maps?cid=2646238445799288226" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · עדי כרמי - קוסמטיקאית פרא רפואית">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijows2hdtl" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A2%D7%93%D7%99+%D7%9B%D7%A8%D7%9E%D7%99+-+%D7%A7%D7%95%D7%A1%D7%9E%D7%98%D7%99%D7%A7%D7%90%D7%99%D7%AA+%D7%A4%D7%A8%D7%90+%D7%A8%D7%A4%D7%95%D7%90%D7%99%D7%AA+%D7%92%D7%91%D7%A2%D7%AA%D7%99%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="רחובות">
+  <div class="identity"><h3><bdi>תייד מחשבים</bdi></h3><span class="category">תיקון מחשבים</span><p>לוין אפשטיין 9 · רחובות</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>39 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972544207482">054-420-7482</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972544207482" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק תייד מחשבים">וואטסאפ</a> <a href="https://www.google.com/maps?cid=16948995741363349184" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · תייד מחשבים">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chij6zx2prk3" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%AA%D7%99%D7%99%D7%93+%D7%9E%D7%97%D7%A9%D7%91%D7%99%D7%9D+%D7%A8%D7%97%D7%95%D7%91%D7%95%D7%AA" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="בת ים">
+  <div class="identity"><h3><bdi>צמיגי בת ים פנצ&#x27;ריה</bdi></h3><span class="category">צמיגים</span><p>הרב ניסנבאום 5 · בת ים</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.8</strong></div><div>39 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972549031560">054-903-1560</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972549031560" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק צמיגי בת ים פנצ&#x27;ריה">וואטסאפ</a> <a href="https://www.google.com/maps?cid=15782102224595331781" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · צמיגי בת ים פנצ&#x27;ריה">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijk4nquqyz" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A6%D7%9E%D7%99%D7%92%D7%99+%D7%91%D7%AA+%D7%99%D7%9D+%D7%A4%D7%A0%D7%A6%27%D7%A8%D7%99%D7%94+%D7%91%D7%AA+%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="בת ים">
+  <div class="identity"><h3><bdi>מעצב שיער יניב עדן</bdi></h3><span class="category">מספרת גברים</span><p>ז&#x27;בוטינסקי 6 · בת ים</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>39 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972507898808">050-789-8808</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972507898808" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק מעצב שיער יניב עדן">וואטסאפ</a> <a href="https://www.google.com/maps?cid=13771947906276670408" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · מעצב שיער יניב עדן">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijhfcd05mz" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%9E%D7%A2%D7%A6%D7%91+%D7%A9%D7%99%D7%A2%D7%A8+%D7%99%D7%A0%D7%99%D7%91+%D7%A2%D7%93%D7%9F+%D7%91%D7%AA+%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="פתח תקווה">
+  <div class="identity"><h3><bdi>דני גינדיל מעצב שיער גברים וילדים</bdi></h3><span class="category">מספרת גברים</span><p>קלישר‬‎ 28 · פתח תקווה</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.8</strong></div><div>39 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972524797870">052-479-7870</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972524797870" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק דני גינדיל מעצב שיער גברים וילדים">וואטסאפ</a> <a href="https://www.google.com/maps?cid=12992822751052817789" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · דני גינדיל מעצב שיער גברים וילדים">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijeccvlr43" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%93%D7%A0%D7%99+%D7%92%D7%99%D7%A0%D7%93%D7%99%D7%9C+%D7%9E%D7%A2%D7%A6%D7%91+%D7%A9%D7%99%D7%A2%D7%A8+%D7%92%D7%91%D7%A8%D7%99%D7%9D+%D7%95%D7%99%D7%9C%D7%93%D7%99%D7%9D+%D7%A4%D7%AA%D7%97+%D7%AA%D7%A7%D7%95%D7%95%D7%94" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="רחובות">
+  <div class="identity"><h3><bdi>מספרת אלויס</bdi></h3><span class="category">מספרת גברים</span><p>ביל&quot;ו 52-70 · רחובות</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>38 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972547855959">054-785-5959</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972547855959" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק מספרת אלויס">וואטסאפ</a> <a href="https://www.google.com/maps?cid=5987671938097733916" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · מספרת אלויס">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chij5ldugs3" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%9E%D7%A1%D7%A4%D7%A8%D7%AA+%D7%90%D7%9C%D7%95%D7%99%D7%A1+%D7%A8%D7%97%D7%95%D7%91%D7%95%D7%AA" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="בת ים">
+  <div class="identity"><h3><bdi>Парикмахер Колорист Бат-Ям / Hair Stylist VALERIYA Bat_Yam / מסורה בת ים</bdi></h3><span class="category">איפור</span><p>בלפור 91, בת ים, 59631 · בת ים</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>38 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972534380919">053-438-0919</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972534380919" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק Парикмахер Колорист Бат-Ям / Hair Stylist VALERIYA Bat_Yam / מסורה בת ים">וואטסאפ</a> <a href="https://www.google.com/maps?cid=16725742957925831491" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · Парикмахер Колорист Бат-Ям / Hair Stylist VALERIYA Bat_Yam / מסורה בת ים">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chij1wsaaoz" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D0%9F%D0%B0%D1%80%D0%B8%D0%BA%D0%BC%D0%B0%D1%85%D0%B5%D1%80+%D0%9A%D0%BE%D0%BB%D0%BE%D1%80%D0%B8%D1%81%D1%82+%D0%91%D0%B0%D1%82-%D0%AF%D0%BC+%2F+Hair+Stylist+VALERIYA+Bat_Yam+%2F+%D7%9E%D7%A1%D7%95%D7%A8%D7%94+%D7%91%D7%AA+%D7%99%D7%9D+%D7%91%D7%AA+%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="קריית ביאליק">
+  <div class="identity"><h3><bdi>מספרת כלבים Pet Grooming Jenny</bdi></h3><span class="category">טיפוח חיות מחמד</span><p>שדרות ירושלים 15 חיפה · קריית ביאליק</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.8</strong></div><div>36 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972547646898">054-764-6898</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972547646898" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק מספרת כלבים Pet Grooming Jenny">וואטסאפ</a> <a href="https://www.google.com/maps?cid=13097640159489801303" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · מספרת כלבים Pet Grooming Jenny">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijezvur923" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%9E%D7%A1%D7%A4%D7%A8%D7%AA+%D7%9B%D7%9C%D7%91%D7%99%D7%9D+Pet+Grooming+Jenny+%D7%A7%D7%A8%D7%99%D7%99%D7%AA+%D7%91%D7%99%D7%90%D7%9C%D7%99%D7%A7" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="כפר סבא">
+  <div class="identity"><h3><bdi>עדנה מכון יופי</bdi></h3><span class="category">קוסמטיקה</span><p>רוטשילד 75 · כפר סבא</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.8</strong></div><div>36 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972546547954">054-654-7954</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972546547954" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק עדנה מכון יופי">וואטסאפ</a> <a href="https://www.google.com/maps?cid=2942435645668813028" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · עדנה מכון יופי">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijke1ribm5" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A2%D7%93%D7%A0%D7%94+%D7%9E%D7%9B%D7%95%D7%9F+%D7%99%D7%95%D7%A4%D7%99+%D7%9B%D7%A4%D7%A8+%D7%A1%D7%91%D7%90" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="אשקלון">
+  <div class="identity"><h3><bdi>מתוקתקות</bdi></h3><span class="category">קוסמטיקה</span><p>יעקב מרידור 1 · אשקלון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>35 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972506332263">050-633-2263</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972506332263" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק מתוקתקות">וואטסאפ</a> <a href="https://www.google.com/maps?cid=8089701307181201973" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · מתוקתקות">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijtwipbaaf" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%9E%D7%AA%D7%95%D7%A7%D7%AA%D7%A7%D7%95%D7%AA+%D7%90%D7%A9%D7%A7%D7%9C%D7%95%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="ראשון לציון">
+  <div class="identity"><h3><bdi>מספרת כלבים Princess בראשון לציון</bdi></h3><span class="category">טיפוח חיות מחמד</span><p>מורדי הגטאות 28 · ראשון לציון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.6</strong></div><div>34 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972507714743">050-771-4743</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972507714743" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק מספרת כלבים Princess בראשון לציון">וואטסאפ</a> <a href="https://www.google.com/maps?cid=10012912706788762514" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · מספרת כלבים Princess בראשון לציון">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijz0qmje1" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%9E%D7%A1%D7%A4%D7%A8%D7%AA+%D7%9B%D7%9C%D7%91%D7%99%D7%9D+Princess+%D7%91%D7%A8%D7%90%D7%A9%D7%95%D7%9F+%D7%9C%D7%A6%D7%99%D7%95%D7%9F+%D7%A8%D7%90%D7%A9%D7%95%D7%9F+%D7%9C%D7%A6%D7%99%D7%95%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="אשדוד">
+  <div class="identity"><h3><bdi>דודי פון מיוזיק</bdi></h3><span class="category">תיקון טלפונים</span><p>רבי אליעזר בן הורקנוס 6 · אשדוד</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.8</strong></div><div>34 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972524456915">052-445-6915</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972524456915" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק דודי פון מיוזיק">וואטסאפ</a> <a href="https://www.google.com/maps?cid=6969548211510849041" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · דודי פון מיוזיק">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijdvxkkqj" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%93%D7%95%D7%93%D7%99+%D7%A4%D7%95%D7%9F+%D7%9E%D7%99%D7%95%D7%96%D7%99%D7%A7+%D7%90%D7%A9%D7%93%D7%95%D7%93" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="הרצליה">
+  <div class="identity"><h3><bdi>חני צזנה טיפול פנים בהרצליה קוסמטיקאית מוסמכת</bdi></h3><span class="category">קוסמטיקה</span><p>עזרא הסופר 7 · הרצליה</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>32 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972528942167">052-894-2167</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972528942167" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק חני צזנה טיפול פנים בהרצליה קוסמטיקאית מוסמכת">וואטסאפ</a> <a href="https://www.google.com/maps?cid=6385070728158101862" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · חני צזנה טיפול פנים בהרצליה קוסמטיקאית מוסמכת">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijddobinbl" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%97%D7%A0%D7%99+%D7%A6%D7%96%D7%A0%D7%94+%D7%98%D7%99%D7%A4%D7%95%D7%9C+%D7%A4%D7%A0%D7%99%D7%9D+%D7%91%D7%94%D7%A8%D7%A6%D7%9C%D7%99%D7%94+%D7%A7%D7%95%D7%A1%D7%9E%D7%98%D7%99%D7%A7%D7%90%D7%99%D7%AA+%D7%9E%D7%95%D7%A1%D7%9E%D7%9B%D7%AA+%D7%94%D7%A8%D7%A6%D7%9C%D7%99%D7%94" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="נתניה">
+  <div class="identity"><h3><bdi>אופק האינסטלטור</bdi></h3><span class="category">אינסטלציה</span><p>בארי 71, נתניה, 42258 · נתניה</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.8</strong></div><div>32 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972524899545">052-489-9545</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972524899545" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק אופק האינסטלטור">וואטסאפ</a> <a href="https://www.google.com/maps?cid=1006140934089311011" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · אופק האינסטלטור">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijkd4os6zr" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%90%D7%95%D7%A4%D7%A7+%D7%94%D7%90%D7%99%D7%A0%D7%A1%D7%98%D7%9C%D7%98%D7%95%D7%A8+%D7%A0%D7%AA%D7%A0%D7%99%D7%94" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="הוד השרון">
+  <div class="identity"><h3><bdi>שלומית עובד קוסמטיקה ויופי</bdi></h3><span class="category">קוסמטיקה</span><p>אשכול 10 · הוד השרון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>31 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972545771445">054-577-1445</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972545771445" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק שלומית עובד קוסמטיקה ויופי">וואטסאפ</a> <a href="https://www.google.com/maps?cid=1692487350753105992" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · שלומית עובד קוסמטיקה ויופי">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chiji8gjdsw4" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A9%D7%9C%D7%95%D7%9E%D7%99%D7%AA+%D7%A2%D7%95%D7%91%D7%93+%D7%A7%D7%95%D7%A1%D7%9E%D7%98%D7%99%D7%A7%D7%94+%D7%95%D7%99%D7%95%D7%A4%D7%99+%D7%94%D7%95%D7%93+%D7%94%D7%A9%D7%A8%D7%95%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="ראשון לציון">
+  <div class="identity"><h3><bdi>שירה יעל - לק ג&#x27;ל , פדיקור , עיצוב גבות</bdi></h3><span class="category">מניקור ופדיקור</span><p>חיה רוזנטל 5 · ראשון לציון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>31 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972526205940">052-620-5940</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972526205940" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק שירה יעל - לק ג&#x27;ל , פדיקור , עיצוב גבות">וואטסאפ</a> <a href="https://www.google.com/maps?cid=15109423559580093460" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · שירה יעל - לק ג&#x27;ל , פדיקור , עיצוב גבות">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijatscmry1" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A9%D7%99%D7%A8%D7%94+%D7%99%D7%A2%D7%9C+-+%D7%9C%D7%A7+%D7%92%27%D7%9C+%2C+%D7%A4%D7%93%D7%99%D7%A7%D7%95%D7%A8+%2C+%D7%A2%D7%99%D7%A6%D7%95%D7%91+%D7%92%D7%91%D7%95%D7%AA+%D7%A8%D7%90%D7%A9%D7%95%D7%9F+%D7%9C%D7%A6%D7%99%D7%95%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="באר שבע">
+  <div class="identity"><h3><bdi>חן עיצוב ובניית ציפורניים</bdi></h3><span class="category">מניקור ופדיקור</span><p>אשכולית 44 · באר שבע</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>30 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972522962236">052-296-2236</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972522962236" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק חן עיצוב ובניית ציפורניים">וואטסאפ</a> <a href="https://www.google.com/maps?cid=10026773522005425751" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · חן עיצוב ובניית ציפורניים">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chij8zccvspn" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%97%D7%9F+%D7%A2%D7%99%D7%A6%D7%95%D7%91+%D7%95%D7%91%D7%A0%D7%99%D7%99%D7%AA+%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%A0%D7%99%D7%99%D7%9D+%D7%91%D7%90%D7%A8+%D7%A9%D7%91%D7%A2" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="בת ים">
+  <div class="identity"><h3><bdi>GroomRoom</bdi></h3><span class="category">טיפוח חיות מחמד</span><p>בלפור 140 · בת ים</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>30 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972543015509">054-301-5509</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972543015509" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק GroomRoom">וואטסאפ</a> <a href="https://www.google.com/maps?cid=6843051533156520288" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · GroomRoom">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijayoprs6z" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=GroomRoom+%D7%91%D7%AA+%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="באר שבע">
+  <div class="identity"><h3><bdi>הסרת שיער בלייזר באר שבע קליניקת סבינה</bdi></h3><span class="category">קוסמטיקה</span><p>קניון, שדרות יוהנה ז&#x27;בוטינסקי 30 · באר שבע</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>29 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972526340415">052-634-0415</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972526340415" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק הסרת שיער בלייזר באר שבע קליניקת סבינה">וואטסאפ</a> <a href="https://www.google.com/maps?cid=15554914858193478229" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · הסרת שיער בלייזר באר שבע קליניקת סבינה">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijwyf42hzn" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%94%D7%A1%D7%A8%D7%AA+%D7%A9%D7%99%D7%A2%D7%A8+%D7%91%D7%9C%D7%99%D7%99%D7%96%D7%A8+%D7%91%D7%90%D7%A8+%D7%A9%D7%91%D7%A2+%D7%A7%D7%9C%D7%99%D7%A0%D7%99%D7%A7%D7%AA+%D7%A1%D7%91%D7%99%D7%A0%D7%94+%D7%91%D7%90%D7%A8+%D7%A9%D7%91%D7%A2" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="רחובות">
+  <div class="identity"><h3><bdi>נורית בן נתן - בניית ציפורניים ברחובות</bdi></h3><span class="category">מניקור ופדיקור</span><p>שדרות מקס ואמפרו שיין 1 · רחובות</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>28 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972504484411">050-448-4411</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972504484411" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק נורית בן נתן - בניית ציפורניים ברחובות">וואטסאפ</a> <a href="https://www.google.com/maps?cid=7703386534207613557" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · נורית בן נתן - בניית ציפורניים ברחובות">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijwww2lp63" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A0%D7%95%D7%A8%D7%99%D7%AA+%D7%91%D7%9F+%D7%A0%D7%AA%D7%9F+-+%D7%91%D7%A0%D7%99%D7%99%D7%AA+%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%A0%D7%99%D7%99%D7%9D+%D7%91%D7%A8%D7%97%D7%95%D7%91%D7%95%D7%AA+%D7%A8%D7%97%D7%95%D7%91%D7%95%D7%AA" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="פתח תקווה">
+  <div class="identity"><h3><bdi>מוסך סמירנוב</bdi></h3><span class="category">פחחות וצבע</span><p>בר כוכבא 62 · פתח תקווה</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.9</strong></div><div>28 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972526671854">052-667-1854</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972526671854" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק מוסך סמירנוב">וואטסאפ</a> <a href="https://www.google.com/maps?cid=3562241305482240953" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · מוסך סמירנוב">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijzwsn32o2" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%9E%D7%95%D7%A1%D7%9A+%D7%A1%D7%9E%D7%99%D7%A8%D7%A0%D7%95%D7%91+%D7%A4%D7%AA%D7%97+%D7%AA%D7%A7%D7%95%D7%95%D7%94" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="קרית אונו">
+  <div class="identity"><h3><bdi>עיצוב גבות - נועה דלל</bdi></h3><span class="category">קוסמטיקה</span><p>יאיר שטרן 38 א · קרית אונו</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>28 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972505857667">050-585-7667</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972505857667" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק עיצוב גבות - נועה דלל">וואטסאפ</a> <a href="https://www.google.com/maps?cid=14456559810060233377" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · עיצוב גבות - נועה דלל">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijb8j02tm1" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A2%D7%99%D7%A6%D7%95%D7%91+%D7%92%D7%91%D7%95%D7%AA+-+%D7%A0%D7%95%D7%A2%D7%94+%D7%93%D7%9C%D7%9C+%D7%A7%D7%A8%D7%99%D7%AA+%D7%90%D7%95%D7%A0%D7%95" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="הוד השרון">
+  <div class="identity"><h3><bdi>גרין גרדן גינון ופיתוח הוד השרון - עיצוב גינות - דשא סינטטי - גנן בהוד השרון</bdi></h3><span class="category">גינון</span><p>ההגנה 2 · הוד השרון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>28 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972549552228">054-955-2228</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972549552228" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק גרין גרדן גינון ופיתוח הוד השרון - עיצוב גינות - דשא סינטטי - גנן בהוד השרון">וואטסאפ</a> <a href="https://www.google.com/maps?cid=16913755831132908176" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · גרין גרדן גינון ופיתוח הוד השרון - עיצוב גינות - דשא סינטטי - גנן בהוד השרון">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijcb3rvtm3" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%92%D7%A8%D7%99%D7%9F+%D7%92%D7%A8%D7%93%D7%9F+%D7%92%D7%99%D7%A0%D7%95%D7%9F+%D7%95%D7%A4%D7%99%D7%AA%D7%95%D7%97+%D7%94%D7%95%D7%93+%D7%94%D7%A9%D7%A8%D7%95%D7%9F+-+%D7%A2%D7%99%D7%A6%D7%95%D7%91+%D7%92%D7%99%D7%A0%D7%95%D7%AA+-+%D7%93%D7%A9%D7%90+%D7%A1%D7%99%D7%A0%D7%98%D7%98%D7%99+-+%D7%92%D7%A0%D7%9F+%D7%91%D7%94%D7%95%D7%93+%D7%94%D7%A9%D7%A8%D7%95%D7%9F+%D7%94%D7%95%D7%93+%D7%94%D7%A9%D7%A8%D7%95%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="חולון">
+  <div class="identity"><h3><bdi>בראל טיפוח היופי-שירן</bdi></h3><span class="category">מניקור ופדיקור</span><p>מטולה 4 · חולון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.6</strong></div><div>27 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972503006090">050-300-6090</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972503006090" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק בראל טיפוח היופי-שירן">וואטסאפ</a> <a href="https://www.google.com/maps?cid=6324618217748737757" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · בראל טיפוח היופי-שירן">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijdz4ews1" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%91%D7%A8%D7%90%D7%9C+%D7%98%D7%99%D7%A4%D7%95%D7%97+%D7%94%D7%99%D7%95%D7%A4%D7%99-%D7%A9%D7%99%D7%A8%D7%9F+%D7%97%D7%95%D7%9C%D7%95%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="ירושלים">
+  <div class="identity"><h3><bdi>פדיקור מניקור בירושלים - efrat sabag</bdi></h3><span class="category">מניקור ופדיקור</span><p>ניתאי הארבלי 18 · ירושלים</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.7</strong></div><div>27 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972526786897">052-678-6897</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972526786897" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק פדיקור מניקור בירושלים - efrat sabag">וואטסאפ</a> <a href="https://www.google.com/maps?cid=10711490637397689384" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · פדיקור מניקור בירושלים - efrat sabag">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijl8kaydap" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A4%D7%93%D7%99%D7%A7%D7%95%D7%A8+%D7%9E%D7%A0%D7%99%D7%A7%D7%95%D7%A8+%D7%91%D7%99%D7%A8%D7%95%D7%A9%D7%9C%D7%99%D7%9D+-+efrat+sabag+%D7%99%D7%A8%D7%95%D7%A9%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="גבעתיים">
+  <div class="identity"><h3><bdi>שובל לק ג׳ל ובניית ציפורניים בגבעתיים</bdi></h3><span class="category">מניקור ופדיקור</span><p>וייצמן 33 · גבעתיים</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>4.8</strong></div><div>26 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972547243029">054-724-3029</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972547243029" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק שובל לק ג׳ל ובניית ציפורניים בגבעתיים">וואטסאפ</a> <a href="https://www.google.com/maps?cid=15380753698134675020" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · שובל לק ג׳ל ובניית ציפורניים בגבעתיים">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijcbeplyvl" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A9%D7%95%D7%91%D7%9C+%D7%9C%D7%A7+%D7%92%D7%B3%D7%9C+%D7%95%D7%91%D7%A0%D7%99%D7%99%D7%AA+%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%A0%D7%99%D7%99%D7%9D+%D7%91%D7%92%D7%91%D7%A2%D7%AA%D7%99%D7%99%D7%9D+%D7%92%D7%91%D7%A2%D7%AA%D7%99%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="ראשון לציון">
+  <div class="identity"><h3><bdi>נטלי גלוחוב - קוסמטיקאית בראשון לציון |Косметолог в Ришон-ле-Ционе</bdi></h3><span class="category">קוסמטיקה</span><p>רוטשילד 26 · ראשון לציון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>26 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972533724663">053-372-4663</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972533724663" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק נטלי גלוחוב - קוסמטיקאית בראשון לציון |Косметолог в Ришон-ле-Ционе">וואטסאפ</a> <a href="https://www.google.com/maps?cid=4800536978759230605" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · נטלי גלוחוב - קוסמטיקאית בראשון לציון |Косметолог в Ришон-ле-Ционе">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chij5dfps0k1" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%A0%D7%98%D7%9C%D7%99+%D7%92%D7%9C%D7%95%D7%97%D7%95%D7%91+-+%D7%A7%D7%95%D7%A1%D7%9E%D7%98%D7%99%D7%A7%D7%90%D7%99%D7%AA+%D7%91%D7%A8%D7%90%D7%A9%D7%95%D7%9F+%D7%9C%D7%A6%D7%99%D7%95%D7%9F+%D7%A8%D7%90%D7%A9%D7%95%D7%9F+%D7%9C%D7%A6%D7%99%D7%95%D7%9F" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="חולון">
+  <div class="identity"><h3><bdi>פט רום Pet Room</bdi></h3><span class="category">מספרת כלבים</span><p>בורוכוב · חולון</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>25 ביקורות</div></div>
+  <div class="contact"><span><bdi>טלי שאולי גאון</bdi></span><a dir="ltr" href="tel:+972542460490">054-246-0490</a></div>
+  <div class="actions"><div class="buttons">
+  <a href="https://wa.me/972542460490" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק פט רום Pet Room"><span aria-hidden="true">◌</span> וואטסאפ</a>
+  <a href="https://www.google.com/maps?cid=8732166113770059676" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · פט רום Pet Room">מפות <span aria-hidden="true">↗</span></a>
+  </div><div class="source"><a href="https://easy.co.il/page/10120766" target="_blank" rel="noopener noreferrer" >איזי</a> · <a href="https://welp.co.il/business/g-chijiqnvw72s" target="_blank" rel="noopener noreferrer" >Welp · וואטסאפ</a></div></div>
+</li>
+<li class="lead" data-city="נתניה">
+  <div class="identity"><h3><bdi>ירדן שלומי - קליניקה לטיפולי עור מתקדמים</bdi></h3><span class="category">קוסמטיקה</span><p>דרך דגניה 60 · נתניה</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>25 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972547206790">054-720-6790</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972547206790" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק ירדן שלומי - קליניקה לטיפולי עור מתקדמים">וואטסאפ</a> <a href="https://www.google.com/maps?cid=9919618147350500793" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · ירדן שלומי - קליניקה לטיפולי עור מתקדמים">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijgrr8ezov" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%99%D7%A8%D7%93%D7%9F+%D7%A9%D7%9C%D7%95%D7%9E%D7%99+-+%D7%A7%D7%9C%D7%99%D7%A0%D7%99%D7%A7%D7%94+%D7%9C%D7%98%D7%99%D7%A4%D7%95%D7%9C%D7%99+%D7%A2%D7%95%D7%A8+%D7%9E%D7%AA%D7%A7%D7%93%D7%9E%D7%99%D7%9D+%D7%A0%D7%AA%D7%A0%D7%99%D7%94" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li>
+<li class="lead" data-city="ירושלים">
+  <div class="identity"><h3><bdi>ברכי זרביב צלמת</bdi></h3><span class="category">צילום</span><p>ירושלים</p></div>
+  <div class="rating"><div class="score"><span aria-hidden="true">★</span> <strong>5.0</strong></div><div>24 ביקורות</div></div>
+  <div class="contact"><span>טלפון עסקי</span><a dir="ltr" href="tel:+972525908770">052-590-8770</a></div>
+  <div class="actions"><div class="buttons"><a href="https://wa.me/972525908770" target="_blank" rel="noopener noreferrer" class="button whatsapp" aria-label="וואטסאפ לעסק ברכי זרביב צלמת">וואטסאפ</a> <a href="https://www.google.com/maps?cid=160619066622225526" target="_blank" rel="noopener noreferrer" class="button maps" aria-label="גוגל מפות · ברכי זרביב צלמת">מפות ↗</a></div><div class="source"><a href="https://welp.co.il/business/g-chijbynvy0qp" target="_blank" rel="noopener noreferrer" >פרטי קשר</a> · <a href="https://search.yahoo.com/search?p=%D7%91%D7%A8%D7%9B%D7%99+%D7%96%D7%A8%D7%91%D7%99%D7%91+%D7%A6%D7%9C%D7%9E%D7%AA+%D7%99%D7%A8%D7%95%D7%A9%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" >בדיקת אתר</a></div></div>
+</li></ul>
+    <p id="empty" class="empty" hidden>אין עסקים שמתאימים לחיפוש.</p>
+  </section>
+  <section class="note" aria-labelledby="method"><h2 id="method">מקורות ושיטת הבדיקה</h2><p>החיפוש כלל עסקים מקומיים בישראל בכמה תחומים. הדירוג, מספר הביקורות והפרופיל נבדקו בגוגל מפות. פעילות העסק מבוססת על הסטטוס ושעות הפעילות שפורסמו במפות או בכרטיס העסק. בדיקת האתר הסתמכה על הקישור בפרופיל ועל חיפוש ברשת. דף ברשת חברתית, באינדקס או בפלטפורמת תורים נחשב כרטיס עסק. הבדיקה משקפת את האתרים שאפשר היה למצוא במועד החיפוש.</p><p style="margin-top:6px">כפתורי וואטסאפ מקשרים למספרים עסקיים שפורסמו. זמינות החשבון בוואטסאפ לא נבדקה באמצעות פתיחת צ׳אט. בגזעוזלי ברבר שופ נמצא מספר עסקי במפות ללא קישור וואטסאפ שפורסם.</p></section>
+</main>
+</div>
+<script>
+ const search = document.querySelector('#search');
+ const city = document.querySelector('#city');
+ const list = document.querySelector('#leads');
+ const count = document.querySelector('#count');
+ const empty = document.querySelector('#empty');
+ const normalize = (value) => value.toLocaleLowerCase('he').replace(/[׳‘’]/g, "'").trim();
+ const leads = [...list.children].map((row) => ({
+   row,
+   city: row.dataset.city,
+   searchable: normalize(row.textContent)
+ }));
+
+ function filterLeads() {
+   const terms = normalize(search.value).split(/\s+/).filter(Boolean);
+   let visibleCount = 0;
+   for (const lead of leads) {
+     const matchesCity = !city.value || lead.city === city.value;
+     const matchesText = terms.every((term) => lead.searchable.includes(term));
+     lead.row.hidden = !matchesCity || !matchesText;
+     if (!lead.row.hidden) visibleCount += 1;
+   }
+   list.hidden = visibleCount === 0;
+   empty.hidden = visibleCount !== 0;
+   count.textContent = visibleCount === 1 ? 'עסק אחד · לפי מספר ביקורות' : visibleCount + ' עסקים · לפי מספר ביקורות';
+ }
+
+ search.addEventListener('input', filterLeads);
+ city.addEventListener('change', filterLeads);
+</script>
+</body>
+</html>
