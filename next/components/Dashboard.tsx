@@ -8,7 +8,7 @@ import { waMessage } from '@/lib/settings';
 type CardLead = {
   id: number; slug: string; name: string; shortName: string;
   category: string; city: string; rating: string | null; reviews: number | null;
-  whatsapp: string | null; phoneIntl: string | null;
+  whatsapp: string | null; phoneIntl: string | null; isTest?: boolean;
 };
 
 const SENT_KEY = 'seoleads-sent-v1';
@@ -113,7 +113,7 @@ export default function Dashboard({ leads, cities, cats }: {
               <article className="card" key={l.id} data-sent={sent.has(l.id) ? 1 : 0}>
                 <div className="thumb">
                   {hero && <img src={hero} alt="" loading="lazy" />}
-                  <span className="badge">{l.category}</span>
+                  <span className="badge">{l.isTest ? `בדיקה · ${l.category}` : l.category}</span>
                   {sent.has(l.id) && <span className="sentflag"><Icon name="check" size={12} /> נשלח</span>}
                 </div>
                 <div className="card-body">

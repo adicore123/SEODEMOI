@@ -1,19 +1,19 @@
 import type { Metadata } from 'next';
 import Icon from '@/components/Icon';
 import Reveal from '@/components/Reveal';
-import { leads } from '@/lib/leads';
+import { ALL_LEADS } from '@/lib/test-lead';
 import { getCategory } from '@/lib/categories';
 import { getExtras } from '@/lib/extras';
 import { IMAGES } from '@/lib/images';
 import { CONFIG } from '@/lib/settings';
 
 export function generateStaticParams() {
-  return leads.map((l) => ({ slug: l.slug }));
+  return ALL_LEADS.map((l) => ({ slug: l.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const lead = leads.find((l) => l.slug === slug);
+  const lead = ALL_LEADS.find((l) => l.slug === slug);
   return { title: lead ? `${lead.shortName} | ${lead.category} ב${lead.city}` : 'אתר לקוח' };
 }
 
@@ -30,7 +30,7 @@ function stars(rating: string | null, size = 15) {
 
 export default async function ClientPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const lead = leads.find((l) => l.slug === slug);
+  const lead = ALL_LEADS.find((l) => l.slug === slug);
   if (!lead) return <div style={{ padding: 80, textAlign: 'center' }}>האתר המבוקש לא נמצא</div>;
 
   const cat = getCategory(lead.category);
