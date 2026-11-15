@@ -16,3 +16,4 @@ seoleads-clients.zip
 # מערכת
 .DS_Store
 Thumbs.db
+.zcode/
