@@ -12,9 +12,9 @@ export const TEST_LEAD: Lead = {
   street: '',
   rating: null,
   reviews: null,
-  phoneIntl: '+97250061808',
-  phoneDisplay: '050-061-1808',
-  whatsapp: '97250061808',
+  phoneIntl: '+972509611808',
+  phoneDisplay: '050-961-1808',
+  whatsapp: '972509611808',
   mapsUrl: null,
   sourceUrl: null,
 };
